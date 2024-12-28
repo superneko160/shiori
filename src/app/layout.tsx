@@ -1,20 +1,20 @@
-import type { Metadata } from "next";
-import { type FC } from "react";
-import "@/styles/globals.css";
+import type { Metadata } from "next"
+
+import "@/styles/globals.css"
+
+type RootLayoutProps = {
+  children: React.ReactNode
+}
 
 export const metadata: Metadata = {
   title: "Shiori",
   description: "読書管理アプリ",
-};
-
-const RootLayout: FC<RootLayoutProps> = (props) => {
-  return (
-    <html lang="ja">
-      <body className="">
-        {props.children}
-      </body>
-    </html>
-  );
 }
 
-export default RootLayout;
+export default function RootLayout(props: RootLayoutProps) {
+  return (
+    <html lang="ja">
+      <body className="">{props.children}</body>
+    </html>
+  )
+}
