@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
 
+import { Header } from "./components/Header"
+
 import "@/styles/globals.css"
 
 type RootLayoutProps = {
@@ -14,7 +16,10 @@ export const metadata: Metadata = {
 export default function RootLayout(props: RootLayoutProps) {
   return (
     <html lang="ja">
-      <body className="">{props.children}</body>
+      <body className="">
+        <Header />
+        <main>{props.children}</main>
+      </body>
     </html>
   )
 }
