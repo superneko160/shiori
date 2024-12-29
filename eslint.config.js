@@ -51,17 +51,7 @@ const eslintConfig = [
       ],
       "func-style": ["error", "declaration", { allowArrowFunctions: false }],
       "prefer-arrow-callback": ["error", { allowNamedFunctions: false }],
-      "import/no-default-export": [
-        "error",
-        {
-          ignore: [
-            "app/not-found.tsx",
-            "pages/**/*.tsx",
-            "app/**/page.tsx",
-            "app/**/layout.tsx",
-          ],
-        },
-      ],
+      // "import/no-default-export": "error"
     },
   },
   {
@@ -73,7 +63,7 @@ const eslintConfig = [
       "tailwind.config.ts",
     ],
     rules: {
-      "import/no-default-export": "off",
+      // "import/no-default-export": "off",
       "import/prefer-default-export": "error",
     },
   },
