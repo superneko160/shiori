@@ -51,7 +51,17 @@ const eslintConfig = [
       ],
       "func-style": ["error", "declaration", { allowArrowFunctions: false }],
       "prefer-arrow-callback": ["error", { allowNamedFunctions: false }],
-      "import/no-default-export": "error",
+      "import/no-default-export": [
+        "error",
+        {
+          ignore: [
+            "app/not-found.tsx",
+            "pages/**/*.tsx",
+            "app/**/page.tsx",
+            "app/**/layout.tsx",
+          ],
+        },
+      ],
     },
   },
   {
