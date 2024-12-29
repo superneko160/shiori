@@ -14,23 +14,23 @@ datasource db {
 }
 
 model Book {
-  id          Int @id @default(autoincrement())  // ID
-  title       String @db.VarChar(255)  // 書籍名
-  author      String?  // 著者
-  pagesRead   Int?  // 読了ページ数
-  totalPages  Int?  // 総ページ数
-  purchasedAt DateTime?  // 購入日
-  startedAt   DateTime?  // 読書開始日
-  finishedAt  DateTime?  // 読了日
-  note        String?  // メモ
-  status      BookStatus @default(CONSIDERING_PURCHASE)  // 現在の状況
-  createdAt   DateTime @default(now())  // データ作成日
-  updatedAt   DateTime @updatedAt  // データ更新日
+  id          Int        @id @default(autoincrement()) // ID
+  title       String     @db.VarChar(255) // 書籍名
+  author      String? // 著者
+  pagesRead   Int? // 読了ページ数
+  totalPages  Int? // 総ページ数
+  purchasedAt DateTime? // 購入日
+  startedAt   DateTime? // 読書開始日
+  finishedAt  DateTime? // 読了日
+  note        String? // メモ
+  status      BookStatus @default(CONSIDERING_PURCHASE) // 現在の状況
+  createdAt   DateTime   @default(now()) // データ作成日
+  updatedAt   DateTime   @updatedAt // データ更新日
 }
 
 enum BookStatus {
   CONSIDERING_PURCHASE // 購入検討中
-  PURCHASED_UNREAD     // 積読中
-  READING              // 読書中
-  COMPLETED            // 読了
+  PURCHASED_UNREAD // 積読中
+  READING // 読書中
+  COMPLETED // 読了
 }

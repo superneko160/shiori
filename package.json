@@ -12,6 +12,8 @@
     "lint:fix": "next lint --fix",
     "format": "prettier --check \"**/*.{ts,tsx,js,jsx,cjs,mjs,md,json,lintstagedrc,yml,yaml}\"",
     "format:fix": "prettier --write \"**/*.{ts,tsx,js,jsx,cjs,mjs,md,json,lintstagedrc,yml,yaml}\"",
+    "prismaformat": "prisma format",
+    "prismalint": "prisma validate",
     "clean": "git clean -xdf node_modules dist",
     "prepare": "husky"
   },
