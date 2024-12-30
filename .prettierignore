@@ -1,0 +1,5 @@
+package.json
+package-lock.json
+src/components/
+src/lib/
+src/styles/

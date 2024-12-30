@@ -68,7 +68,7 @@ const eslintConfig = [
     },
   },
   {
-    ignores: ["src/components/ui/*", "*.md"],
+    ignores: ["src/components/", "tailwind.config.ts", "*.md"],
   },
 ]
 
