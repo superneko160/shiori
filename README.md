@@ -41,3 +41,18 @@ npm run dev
 ```
 http://localhost:3000
 ```
+
+## Stacks
+
+| Category | Technology |
+| ---- | ---- |
+| Framework | Next.js(App Router) |
+| Language | TypeScript |
+| Package manager | npm |
+| CSS Framework | Tailwind CSS |
+| UI Library | shadcn/ui |
+| Database | MySQL |
+| ORM | Prisma |
+| Linter| ESLint |
+| Formatter | Prettier |
+| Others | Husky |
