@@ -1,5 +1,7 @@
 # Shiori
 
+本をどこまで読んだかメモしておく用のアプリ
+
 ## SetUp Environment file
 
 ```bash
@@ -32,4 +34,10 @@ npx prisma migrate dev --name init
 
 ```bash
 npm run dev
+```
+
+## Access
+
+```
+http://localhost:3000
 ```
