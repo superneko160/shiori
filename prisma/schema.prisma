@@ -19,9 +19,9 @@ model Book {
   author      String? // 著者
   pagesRead   Int? // 読了ページ数
   totalPages  Int? // 総ページ数
-  purchasedAt DateTime? // 購入日
-  startedAt   DateTime? // 読書開始日
-  finishedAt  DateTime? // 読了日
+  purchasedAt DateTime? @db.Date // 購入日
+  startedAt   DateTime? @db.Date // 読書開始日
+  finishedAt  DateTime? @db.Date // 読了日
   note        String? // メモ
   status      BookStatus @default(CONSIDERING_PURCHASE) // 現在の状況
   createdAt   DateTime   @default(now()) // データ作成日
