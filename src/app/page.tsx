@@ -53,7 +53,15 @@ export default async function Home() {
           <TableBody>
             {books.map((book) => (
               <TableRow key={book.id}>
-                <TableCell className="font-medium">{book.title}</TableCell>
+                <TableCell className="font-medium">
+                  <Link
+                    href={`/books/detail/${book.id}`}
+                    key={book.id}
+                    className="hover:underline"
+                  >
+                    {book.title}
+                  </Link>
+                </TableCell>
                 <TableCell>{book.author ?? "-"}</TableCell>
                 <TableCell>
                   {statusMap[book.status as keyof typeof statusMap]}
