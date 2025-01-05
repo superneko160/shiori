@@ -1,5 +1,7 @@
 import { PrismaClient } from "@prisma/client"
 
+import { BookDetailsTable } from "./../../../components/books/BookDetailsTable"
+
 export default async function editBookPage({
   params,
 }: {
@@ -26,7 +28,10 @@ export default async function editBookPage({
   return (
     <div className="container mx-3 mx-auto py-8">
       {book ? (
-        <h1 className="mb-6 text-2xl font-bold">{book.title}</h1>
+        <div>
+          <h1 className="mb-6 text-2xl font-bold">{book.title}</h1>
+          <BookDetailsTable book={book} />
+        </div>
       ) : (
         <div>Book not found</div>
       )}
