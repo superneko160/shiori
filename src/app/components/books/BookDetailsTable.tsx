@@ -19,7 +19,7 @@ export function BookDetailsTable({ book }: BookDetailsTableProps) {
           </TableRow>
           <TableRow>
             <TableCell className="font-medium">著者</TableCell>
-            <TableCell>{book.author ?? "-"}</TableCell>
+            <TableCell>{book.author}</TableCell>
           </TableRow>
           <TableRow>
             <TableCell className="font-medium">ステータス</TableCell>
@@ -53,11 +53,7 @@ export function BookDetailsTable({ book }: BookDetailsTableProps) {
           <TableRow>
             <TableCell className="font-medium">メモ</TableCell>
             <TableCell>
-              {book.note ? (
-                <div className="whitespace-pre-wrap">{book.note}</div>
-              ) : (
-                "-"
-              )}
+              <div className="whitespace-pre-wrap">{book.note}</div>
             </TableCell>
           </TableRow>
           <TableRow>
