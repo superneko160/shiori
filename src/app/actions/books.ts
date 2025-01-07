@@ -4,8 +4,7 @@ import { BookStatus, PrismaClient } from "@prisma/client"
 
 type CreateBookInput = {
   title: string
-  author?: string | null
-  totalPages?: number | null
+  author: string
   status: BookStatus
   purchasedAt?: Date | null
 }
@@ -50,10 +49,7 @@ function validateBookData(formData: FormData): CreateBookInput {
 
   return {
     title,
-    author: (formData.get("author") as string) || null,
-    totalPages: formData.get("totalPages")
-      ? parseInt(formData.get("totalPages") as string)
-      : null,
+    author: (formData.get("author") as string) || "",
     status: status as BookStatus,
     purchasedAt: formData.get("purchasedAt")
       ? new Date(formData.get("purchasedAt") as string)
