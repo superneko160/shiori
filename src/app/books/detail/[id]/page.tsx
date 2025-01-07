@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client"
 
 import { BookDetailsTable } from "./../../../components/books/BookDetailsTable"
+import { DeleteButton, EditButton } from "./../../../components/buttons"
 
 export default async function editBookPage({
   params,
@@ -29,7 +30,13 @@ export default async function editBookPage({
     <div className="container mx-3 mx-auto py-8">
       {book ? (
         <div>
-          <h1 className="mb-6 text-2xl font-bold">{book.title}</h1>
+          <div className="mb-6 flex items-center justify-between">
+            <h1 className="mb-6 text-2xl font-bold">{book.title}</h1>
+            <div className="flex">
+              <EditButton />
+              <DeleteButton />
+            </div>
+          </div>
           <BookDetailsTable book={book} />
         </div>
       ) : (
