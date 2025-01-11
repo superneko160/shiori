@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { getBooks } from "@/app/actions/books"
 import { Button } from "@/components/ui/button"
 import {
   Table,
@@ -8,17 +9,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { PrismaClient } from "@prisma/client"
 
 export default async function Home() {
-  const prisma = new PrismaClient()
-
-  const books = await prisma.book.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
-  })
-
   // ステータスの日本語表示用のマッピング
   const statusMap = {
     CONSIDERING_PURCHASE: "購入検討中",
@@ -26,6 +18,8 @@ export default async function Home() {
     READING: "読書中",
     COMPLETED: "読了",
   }
+
+  const books = await getBooks()
 
   return (
     <main className="container mx-auto py-8">

@@ -10,6 +10,53 @@ type CreateBookInput = {
 }
 
 /**
+ * 全書籍情報の取得
+ * @return {Array[Book]}
+ */
+export async function getBooks() {
+  try {
+    const prisma = new PrismaClient()
+
+    const books = await prisma.book.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    })
+
+    return books
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+/**
+ * 書籍の取得
+ * @param {number} id 書籍ID
+ * @return {Book}
+ */
+export async function getBook(id: number) {
+  try {
+    const prisma = new PrismaClient()
+
+    const book = await prisma.book.findUnique({
+      where: {
+        id: id,
+      },
+    })
+
+    // 日付データの変換（ISOString → Date）
+    return {
+      ...book,
+      purchasedAt: book.purchasedAt?.toISOString() ?? null,
+      startedAt: book.startedAt?.toISOString() ?? null,
+      finishedAt: book.finishedAt?.toISOString() ?? null,
+    }
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+/**
  * 書籍の新規登録
  * @param {FormData} formData フォームに入力されたデータ
  * @return
