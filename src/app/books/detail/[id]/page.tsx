@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { getBook } from "@/app/actions/books"
 
 import { BookDetailsTable } from "./../../../components/books/BookDetailsTable"
@@ -24,7 +25,9 @@ export default async function editBookPage({
           <div className="mb-6 flex items-center justify-between">
             <h1 className="mb-6 text-2xl font-bold">{book.title}</h1>
             <div className="flex">
-              <EditButton />
+              <Link href={`/books/edit/${bookId}`}>
+                <EditButton />
+              </Link>
               <DeleteButton />
             </div>
           </div>
