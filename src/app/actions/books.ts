@@ -188,7 +188,7 @@ export async function deleteBook(id: number) {
       return { success: false, error: "削除対象の書籍が存在しません" }
     }
 
-    const book = await prisma.book.update({
+    const book = await prisma.book.delete({
       where: { id: id },
     })
 

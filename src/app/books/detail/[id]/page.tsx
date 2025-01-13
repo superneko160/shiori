@@ -28,7 +28,7 @@ export default async function editBookPage({
               <Link href={`/books/edit/${bookId}`}>
                 <EditButton />
               </Link>
-              <DeleteButton />
+              <DeleteButton bookId={bookId} />
             </div>
           </div>
           <BookDetailsTable book={book} />
