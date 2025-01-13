@@ -1,7 +1,8 @@
 "use server"
 
-import { BookStatus, PrismaClient } from "@prisma/client"
+import { BookStatus } from "@prisma/client"
 
+import { prisma } from "./../database/prismaclient"
 import { getDateValue, getNumberValue, getStringValue } from "./../utils/form"
 
 type CreateBookInput = {
@@ -30,8 +31,6 @@ type UpdateBookInput = {
  */
 export async function getBooks() {
   try {
-    const prisma = new PrismaClient()
-
     const books = await prisma.book.findMany({
       orderBy: {
         createdAt: "desc",
@@ -51,8 +50,6 @@ export async function getBooks() {
  */
 export async function getBook(id: number) {
   try {
-    const prisma = new PrismaClient()
-
     const book = await prisma.book.findUnique({
       where: {
         id: id,
@@ -79,8 +76,6 @@ export async function getBook(id: number) {
 export async function createBook(formData: FormData) {
   try {
     const data = validateBookData(formData)
-
-    const prisma = new PrismaClient()
 
     const book = await prisma.book.create({
       data: data,
@@ -127,8 +122,6 @@ function validateBookData(formData: FormData): CreateBookInput {
 export async function updateBook(id: number, formData: FormData) {
   try {
     const data = validateUpdateBookData(id, formData)
-
-    const prisma = new PrismaClient()
 
     const book = await prisma.book.update({
       where: { id: data.id },
