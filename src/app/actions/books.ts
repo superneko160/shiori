@@ -39,7 +39,10 @@ export async function getBooks() {
 
     return books
   } catch (error) {
-    throw new Error(error)
+    if (error instanceof Error) {
+      return { success: false, error: error.message }
+    }
+    return { success: false, error: "エラーが発生しました" }
   }
 }
 
@@ -59,12 +62,15 @@ export async function getBook(id: number) {
     // 日付データの変換（ISOString → Date）
     return {
       ...book,
-      purchasedAt: book.purchasedAt?.toISOString() ?? null,
-      startedAt: book.startedAt?.toISOString() ?? null,
-      finishedAt: book.finishedAt?.toISOString() ?? null,
+      purchasedAt: book?.purchasedAt?.toISOString() ?? null,
+      startedAt: book?.startedAt?.toISOString() ?? null,
+      finishedAt: book?.finishedAt?.toISOString() ?? null,
     }
   } catch (error) {
-    throw new Error(error)
+    if (error instanceof Error) {
+      return { success: false, error: error.message }
+    }
+    return { success: false, error: "エラーが発生しました" }
   }
 }
 

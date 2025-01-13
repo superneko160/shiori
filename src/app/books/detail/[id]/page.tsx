@@ -4,7 +4,7 @@ import { getBook } from "@/app/actions/books"
 import { BookDetailsTable } from "./../../../components/books/BookDetailsTable"
 import { DeleteButton, EditButton } from "./../../../components/buttons"
 
-export default async function editBookPage({
+export default async function DetailBookPage({
   params,
 }: {
   params: { id: string }
