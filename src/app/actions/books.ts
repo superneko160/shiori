@@ -118,6 +118,7 @@ function validateBookData(formData: FormData): CreateBookInput {
  * 書籍情報の更新
  * @param {number} id 書籍ID
  * @param {FormData} formData フォームに入力されたデータ
+ * @return {Object}　{success: 成否ステータス, 書籍情報}
  */
 export async function updateBook(id: number, formData: FormData) {
   try {
@@ -168,5 +169,34 @@ function validateUpdateBookData(
     startedAt: getDateValue(formData, "startedAt"),
     finishedAt: getDateValue(formData, "finishedAt"),
     note: getStringValue(formData, "note"),
+  }
+}
+
+/**
+ * 書籍情報の削除
+ * @param {number} id 書籍ID
+ * @return {Object}　{success: 成否ステータス, 書籍情報}
+ */
+export async function deleteBook(id: number) {
+  try {
+    // 削除前に書籍が存在するか確認
+    const existingBook = await prisma.book.findUnique({
+      where: { id: id },
+    })
+
+    if (!existingBook) {
+      return { success: false, error: "削除対象の書籍が存在しません" }
+    }
+
+    const book = await prisma.book.update({
+      where: { id: id },
+    })
+
+    return { success: true, book }
+  } catch (error) {
+    if (error instanceof Error) {
+      return { success: false, error: error.message }
+    }
+    return { success: false, error: "エラーが発生しました" }
   }
 }
