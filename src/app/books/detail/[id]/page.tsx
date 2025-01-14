@@ -7,7 +7,7 @@ import { DeleteButton, EditButton } from "./../../../components/buttons"
 export default async function DetailBookPage({
   params,
 }: {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }) {
   const { id } = await params
   const bookId = parseInt(id)

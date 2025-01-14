@@ -5,7 +5,7 @@ import { UpdateBookForm } from "./../../../components/books/UpdateBookForm"
 export default async function editBookPage({
   params,
 }: {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }) {
   const { id } = await params
   const bookId = parseInt(id)
