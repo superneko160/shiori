@@ -1,7 +1,9 @@
 "use server"
 
+import { redirect } from "next/navigation"
 import { BookStatus } from "@prisma/client"
 
+import type { Book } from "./../types"
 import { prisma } from "./../database/prismaclient"
 import { getDateValue, getNumberValue, getStringValue } from "./../utils/form"
 
@@ -27,9 +29,9 @@ type UpdateBookInput = {
 
 /**
  * 全書籍情報の取得
- * @return {Array[Book]}
+ * @return {Promise<Book[]>}
  */
-export async function getBooks() {
+export async function getBooks(): Promise<Book[]> {
   try {
     const books = await prisma.book.findMany({
       orderBy: {
@@ -39,19 +41,17 @@ export async function getBooks() {
 
     return books
   } catch (error) {
-    if (error instanceof Error) {
-      return { success: false, error: error.message }
-    }
-    return { success: false, error: "エラーが発生しました" }
+    console.error(error)
+    redirect("/error")
   }
 }
 
 /**
  * 書籍の取得
  * @param {number} id 書籍ID
- * @return {Book}
+ * @return {Promise<Book | null>}
  */
-export async function getBook(id: number) {
+export async function getBook(id: number): Promise<Book | null> {
   try {
     const book = await prisma.book.findUnique({
       where: {
@@ -59,18 +59,10 @@ export async function getBook(id: number) {
       },
     })
 
-    // 日付データの変換（ISOString → Date）
-    return {
-      ...book,
-      purchasedAt: book?.purchasedAt?.toISOString() ?? null,
-      startedAt: book?.startedAt?.toISOString() ?? null,
-      finishedAt: book?.finishedAt?.toISOString() ?? null,
-    }
+    return book
   } catch (error) {
-    if (error instanceof Error) {
-      return { success: false, error: error.message }
-    }
-    return { success: false, error: "エラーが発生しました" }
+    console.error(error)
+    redirect("/error")
   }
 }
 

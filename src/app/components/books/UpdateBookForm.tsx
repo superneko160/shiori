@@ -1,6 +1,5 @@
 "use client"
 
-import type { Book } from "@prisma/client"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { updateBook } from "@/app/actions/books"
@@ -24,6 +23,8 @@ import { cn } from "@/lib/utils"
 import { format } from "date-fns"
 import { Calendar as CalendarIcon } from "lucide-react"
 
+import type { Book } from "./../../types"
+
 type BookDetailsTableProps = {
   book: Book
 }
@@ -33,7 +34,6 @@ export function UpdateBookForm({ book }: BookDetailsTableProps) {
 
   async function onSubmit(formData: FormData) {
     const result = await updateBook(book.id, formData)
-    console.log(result)
 
     if (result.success) {
       router.push(`/books/detail/${book.id}`)
