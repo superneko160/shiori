@@ -30,6 +30,7 @@ const eslintConfig = [
       ...(typescript.configs?.["recommended-type-checked"]?.rules ?? {}),
       ...(typescript.configs?.["stylistic-type-checked"]?.rules ?? {}),
       "@typescript-eslint/array-type": "off",
+      "@typescript-eslint/await-thenable": "off",
       "@typescript-eslint/consistent-type-definitions": ["error", "type"],
       "@typescript-eslint/consistent-type-imports": [
         "warn",

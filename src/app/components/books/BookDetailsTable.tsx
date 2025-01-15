@@ -1,6 +1,6 @@
-import type { Book } from "@prisma/client"
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table"
 
+import type { Book } from "./../../types"
 import { calculateProgress, statusMap } from "./../../utils/book"
 import { formatDate } from "./../../utils/date"
 
