@@ -189,7 +189,7 @@ function DateSelect({
           <Calendar
             mode="single"
             selected={date ?? undefined}
-            onSelect={(newDate) => setDate(newDate ?? null)}
+            onSelect={(newDate: Date | undefined) => setDate(newDate ?? null)}
             initialFocus
           />
         </PopoverContent>
