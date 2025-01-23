@@ -22,6 +22,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { cn } from "@/lib/utils"
 import { format } from "date-fns"
 import { Calendar as CalendarIcon } from "lucide-react"
+import { toast } from "sonner"
 
 import type { Book } from "./../../types"
 
@@ -36,6 +37,7 @@ export function UpdateBookForm({ book }: BookDetailsTableProps) {
     const result = await updateBook(book.id, formData)
 
     if (result.success) {
+      toast.success("書籍の情報を更新しました")
       router.push(`/books/detail/${book.id}`)
     }
   }
