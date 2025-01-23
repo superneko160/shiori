@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { Trash2 } from "lucide-react"
+import { toast } from "sonner"
 
 import { deleteBook } from "./../../actions/books"
 
@@ -46,6 +47,7 @@ export function DeleteButton({ bookId }: DeleteBookButtonProps) {
         throw new Error(result.error)
       }
 
+      toast.error("書籍の情報を削除しました")
       router.push("/")
     } catch (error) {
       console.error("Error deleting book:", error)

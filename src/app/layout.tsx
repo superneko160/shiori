@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { Toaster } from "@/components/ui/sonner"
 
 import { Header } from "./components/Header"
 
@@ -19,6 +20,7 @@ export default function RootLayout(props: RootLayoutProps) {
       <body className="">
         <Header />
         <main>{props.children}</main>
+        <Toaster />
       </body>
     </html>
   )

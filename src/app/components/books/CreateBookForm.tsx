@@ -12,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { toast } from "sonner"
 
 export function CreateBookForm() {
   const router = useRouter()
@@ -23,7 +24,10 @@ export function CreateBookForm() {
     setLoading(false)
 
     if (result.success) {
+      toast.success("書籍の登録が完了しました")
       router.push("/books/new")
+    } else {
+      toast.error("書籍の登録に失敗しました。再度お試しください")
     }
   }
 
