@@ -15,3 +15,14 @@ export type Book = {
   createdAt: Date
   updatedAt: Date
 }
+
+export type Status =
+  | "CONSIDERING_PURCHASE"
+  | "PURCHASED_UNREAD"
+  | "READING"
+  | "COMPLETED"
+
+export type StatusConfig = {
+  label: string
+  variant: "considering_purchase" | "purchaced_unread" | "reading" | "completed"
+}

@@ -13,15 +13,25 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
-import { Trash2 } from "lucide-react"
+import { CirclePlus, SquarePen, Trash2 } from "lucide-react"
 import { toast } from "sonner"
 
 import { deleteBook } from "./../../actions/books"
 
+export function NewButton() {
+  return (
+    <Button variant="default" className="bg-indigo-600 hover:bg-indigo-700">
+      <CirclePlus className="h-5 w-5" />
+      書籍登録
+    </Button>
+  )
+}
+
 export function EditButton() {
   return (
     <div className="m-1">
-      <Button variant="secondary" className="w-24">
+      <Button variant="secondary" className="bg-slate-100 hover:bg-slate-200">
+        <SquarePen className="h-5 w-5" />
         編集
       </Button>
     </div>
@@ -62,7 +72,7 @@ export function DeleteButton({ bookId }: DeleteBookButtonProps) {
     <div className="m-1">
       <button
         onClick={() => setOpen(true)}
-        className="ml-2 rounded-full p-2 text-red-600 transition-colors hover:bg-red-50"
+        className="ml-2 rounded-md bg-red-500 p-2 text-white hover:bg-red-600"
         aria-label="本を削除"
       >
         <Trash2 className="h-5 w-5" />
