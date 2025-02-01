@@ -1,7 +1,6 @@
 import Link from "next/link"
 import { getBooks } from "@/app/actions/books"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import {
   Table,
   TableBody,
@@ -12,6 +11,7 @@ import {
 } from "@/components/ui/table"
 
 import type { Status } from "./types"
+import { NewButton } from "./components/buttons"
 import { STATUS_CONFIG } from "./consts"
 
 export default async function Home() {
@@ -22,12 +22,7 @@ export default async function Home() {
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-2xl font-bold">書籍一覧</h1>
         <Link href="/books/new">
-          <Button
-            variant="default"
-            className="bg-indigo-600 hover:bg-indigo-700"
-          >
-            書籍登録
-          </Button>
+          <NewButton />
         </Link>
       </div>
 
