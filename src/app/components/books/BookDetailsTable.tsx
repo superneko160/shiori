@@ -1,7 +1,9 @@
+import { Badge } from "@/components/ui/badge"
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table"
 
-import type { Book } from "./../../types"
-import { calculateProgress, statusMap } from "./../../utils/book"
+import type { Book, Status } from "./../../types"
+import { STATUS_CONFIG } from "./../../consts"
+import { calculateProgress } from "./../../utils/book"
 import { formatDate } from "./../../utils/date"
 
 type BookDetailsTableProps = {
@@ -23,7 +25,11 @@ export function BookDetailsTable({ book }: BookDetailsTableProps) {
           </TableRow>
           <TableRow>
             <TableCell className="font-medium">ステータス</TableCell>
-            <TableCell>{statusMap[book.status]}</TableCell>
+            <TableCell>
+              <Badge variant={STATUS_CONFIG[book.status as Status].variant}>
+                {STATUS_CONFIG[book.status as Status].label}
+              </Badge>
+            </TableCell>
           </TableRow>
           <TableRow>
             <TableCell className="font-medium">進捗</TableCell>

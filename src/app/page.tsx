@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { getBooks } from "@/app/actions/books"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
   Table,
@@ -10,15 +11,10 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-export default async function Home() {
-  // ステータスの日本語表示用のマッピング
-  const statusMap = {
-    CONSIDERING_PURCHASE: "購入検討中",
-    PURCHASED_UNREAD: "積読中",
-    READING: "読書中",
-    COMPLETED: "読了",
-  }
+import type { Status } from "./types"
+import { STATUS_CONFIG } from "./consts"
 
+export default async function Home() {
   const books = await getBooks()
 
   return (
@@ -58,7 +54,9 @@ export default async function Home() {
                 </TableCell>
                 <TableCell>{book.author ?? "-"}</TableCell>
                 <TableCell>
-                  {statusMap[book.status as keyof typeof statusMap]}
+                  <Badge variant={STATUS_CONFIG[book.status as Status].variant}>
+                    {STATUS_CONFIG[book.status as Status].label}
+                  </Badge>
                 </TableCell>
               </TableRow>
             ))}
