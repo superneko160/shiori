@@ -12,6 +12,7 @@ type CreateBookInput = {
   author: string
   status: BookStatus
   purchasedAt?: Date | null
+  userId: string
 }
 
 type UpdateBookInput = {
@@ -25,7 +26,10 @@ type UpdateBookInput = {
   startedAt?: Date | null
   finishedAt?: Date | null
   note: string
+  userId: string
 }
+
+const DUMMY_USERID = "A202"
 
 /**
  * 全書籍情報の取得
@@ -34,6 +38,9 @@ type UpdateBookInput = {
 export async function getBooks(): Promise<Book[]> {
   try {
     const books = await prisma.book.findMany({
+      where: {
+        userId: DUMMY_USERID,
+      },
       orderBy: {
         createdAt: "desc",
       },
@@ -109,6 +116,7 @@ function validateBookData(formData: FormData): CreateBookInput {
     author: getStringValue(formData, "author"),
     status: status as BookStatus,
     purchasedAt: getDateValue(formData, "purchasedAt"),
+    userId: DUMMY_USERID,
   }
 }
 
