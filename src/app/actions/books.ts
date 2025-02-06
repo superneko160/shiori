@@ -29,17 +29,16 @@ type UpdateBookInput = {
   userId: string
 }
 
-const DUMMY_USERID = "A202"
-
 /**
  * 全書籍情報の取得
+ * @param {string} userId ユーザID
  * @return {Promise<Book[]>}
  */
-export async function getBooks(): Promise<Book[]> {
+export async function getBooks(userId: string): Promise<Book[]> {
   try {
     const books = await prisma.book.findMany({
       where: {
-        userId: DUMMY_USERID,
+        userId: userId,
       },
       orderBy: {
         createdAt: "desc",
@@ -76,11 +75,12 @@ export async function getBook(id: number): Promise<Book | null> {
 /**
  * 書籍の新規登録
  * @param {FormData} formData フォームに入力されたデータ
+ * @param {string} userId ユーザID
  * @return {Object}　{success: 成否ステータス, 書籍情報}
  */
-export async function createBook(formData: FormData) {
+export async function createBook(formData: FormData, userId: string) {
   try {
-    const data = validateBookData(formData)
+    const data = validateBookData(formData, userId)
 
     const book = await prisma.book.create({
       data: data,
@@ -98,9 +98,10 @@ export async function createBook(formData: FormData) {
 /**
  * 登録用のフォームのデータをバリデーションして型安全な形に変換
  * @param {FormData} formData フォームに入力されたデータ
+ * @param {string} userId ユーザID
  * @return {CreateBookInput} 新規登録データ
  */
-function validateBookData(formData: FormData): CreateBookInput {
+function validateBookData(formData: FormData, userId: string): CreateBookInput {
   const title = formData.get("title")
   if (!title || typeof title !== "string") {
     throw new Error("タイトルは必須です")
@@ -116,7 +117,7 @@ function validateBookData(formData: FormData): CreateBookInput {
     author: getStringValue(formData, "author"),
     status: status as BookStatus,
     purchasedAt: getDateValue(formData, "purchasedAt"),
-    userId: DUMMY_USERID,
+    userId: userId,
   }
 }
 

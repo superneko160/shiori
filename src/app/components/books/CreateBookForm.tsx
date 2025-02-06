@@ -14,13 +14,17 @@ import {
 } from "@/components/ui/select"
 import { toast } from "sonner"
 
-export function CreateBookForm() {
+type CreateBookFormProps = {
+  userId: string
+}
+
+export function CreateBookForm({ userId }: CreateBookFormProps) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
 
   async function onSubmit(formData: FormData) {
     setLoading(true)
-    const result = await createBook(formData)
+    const result = await createBook(formData, userId)
     setLoading(false)
 
     if (result.success) {

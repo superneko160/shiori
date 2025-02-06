@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { getBook } from "@/app/actions/books"
+import { currentUser } from "@clerk/nextjs/server"
 
 import { BookDetailsTable } from "./../../../components/books/BookDetailsTable"
 import { DeleteButton, EditButton } from "./../../../components/buttons"
@@ -11,6 +12,10 @@ export default async function DetailBookPage({
 }) {
   const { id } = await params
   const bookId = parseInt(id)
+
+  const user = await currentUser()
+
+  if (!user) return <div>新規登録 or ログインしてください</div>
 
   if (isNaN(bookId)) {
     return <div>Invalid book ID</div>
