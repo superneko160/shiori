@@ -8,12 +8,25 @@
 npm install
 ```
 
+### Prisma
+
 ```bash
 touch .env
 ```
 
-```bash
+```env
 DATABASE_URL="mysql://root@localhost:3306/shiori
+```
+
+### Clerk
+
+```bash
+touch .env.local
+```
+
+```env
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=xxxxx
+CLERK_SECRET_KEY=xxxxx
 ```
 
 ## Create Database
@@ -53,7 +66,8 @@ http://localhost:3000
 | UI Library        | shadcn/ui           |
 | Database          | MySQL               |
 | ORM               | Prisma              |
+| Authentication    | Clerk               |
 | Linter            | ESLint              |
 | Formatter         | Prettier            |
-| Testing Framework	| Vitest              |
+| Testing Framework | Vitest              |
 | Others            | Husky               |

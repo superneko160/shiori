@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { Toaster } from "@/components/ui/sonner"
+import { ClerkProvider } from "@clerk/nextjs"
 
 import { Header } from "./components/Header"
 
@@ -16,12 +17,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout(props: RootLayoutProps) {
   return (
-    <html lang="ja">
-      <body className="">
-        <Header />
-        <main>{props.children}</main>
-        <Toaster />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="ja">
+        <body>
+          <Header />
+          <main>{props.children}</main>
+          <Toaster />
+        </body>
+      </html>
+    </ClerkProvider>
   )
 }

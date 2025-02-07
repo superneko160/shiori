@@ -24,6 +24,7 @@ model Book {
   finishedAt  DateTime? // 読了日
   note        String     @default("") // メモ
   status      BookStatus @default(CONSIDERING_PURCHASE) // 現在の状況
+  userId      String     @db.VarChar(255) // ユーザID
   createdAt   DateTime   @default(now()) // データ作成日
   updatedAt   DateTime   @updatedAt // データ更新日
 }

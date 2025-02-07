@@ -9,13 +9,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { currentUser } from "@clerk/nextjs/server"
 
 import type { Status } from "./types"
 import { NewButton } from "./components/buttons"
 import { STATUS_CONFIG } from "./consts"
 
 export default async function Home() {
-  const books = await getBooks()
+  const user = await currentUser()
+
+  if (!user) return <div>新規登録 or ログインしてください</div>
+
+  const books = await getBooks(user.id)
 
   return (
     <main className="container mx-auto py-8">

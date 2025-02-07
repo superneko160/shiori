@@ -1,4 +1,5 @@
 import { getBook } from "@/app/actions/books"
+import { currentUser } from "@clerk/nextjs/server"
 
 import { UpdateBookForm } from "./../../../components/books/UpdateBookForm"
 
@@ -9,6 +10,10 @@ export default async function editBookPage({
 }) {
   const { id } = await params
   const bookId = parseInt(id)
+
+  const user = await currentUser()
+
+  if (!user) return <div>新規登録 or ログインしてください</div>
 
   if (isNaN(bookId)) {
     return <div>Invalid book ID</div>
