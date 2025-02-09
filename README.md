@@ -15,7 +15,7 @@ touch .env
 ```
 
 ```env
-DATABASE_URL="mysql://root@localhost:3306/shiori
+DATABASE_URL="postgresql://postgres:yourpassword@localhost:5432/shiori?schema=public"
 ```
 
 ### Clerk
@@ -32,9 +32,12 @@ CLERK_SECRET_KEY=xxxxx
 ## Create Database
 
 ```sql
-CREATE DATABASE IF NOT EXISTS `shiori`
-DEFAULT CHARACTER SET utf8
-COLLATE utf8_general_ci;
+CREATE DATABASE shiori
+WITH
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'ja_JP.UTF-8'
+    LC_CTYPE = 'ja_JP.UTF-8'
+    TEMPLATE template0;
 ```
 
 ## Execute migration
@@ -64,7 +67,7 @@ http://localhost:3000
 | Package manager   | npm                 |
 | CSS Framework     | Tailwind CSS        |
 | UI Library        | shadcn/ui           |
-| Database          | MySQL               |
+| Database          | PostgreSQL          |
 | ORM               | Prisma              |
 | Authentication    | Clerk               |
 | Linter            | ESLint              |
