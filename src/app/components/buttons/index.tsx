@@ -20,7 +20,10 @@ import { deleteBook } from "./../../actions/books"
 
 export function NewButton() {
   return (
-    <Button variant="default" className="bg-indigo-600 hover:bg-indigo-700">
+    <Button
+      variant="default"
+      className="bg-indigo-500 text-slate-100 hover:bg-indigo-400"
+    >
       <CirclePlus className="h-5 w-5" />
       書籍登録
     </Button>
@@ -72,7 +75,7 @@ export function DeleteButton({ bookId }: DeleteBookButtonProps) {
     <div className="m-1">
       <button
         onClick={() => setOpen(true)}
-        className="ml-2 rounded-md bg-red-500 p-2 text-white hover:bg-red-600"
+        className="ml-2 rounded-md bg-red-500 p-2 text-slate-100 hover:bg-red-400"
         aria-label="本を削除"
       >
         <Trash2 className="h-5 w-5" />
@@ -94,7 +97,7 @@ export function DeleteButton({ bookId }: DeleteBookButtonProps) {
             <AlertDialogAction
               onClick={handleDelete}
               disabled={isDeleting}
-              className="bg-red-600 hover:bg-red-700 focus:ring-red-600"
+              className="bg-red-600 hover:bg-red-500 focus:ring-red-600"
             >
               {isDeleting ? "削除中..." : "削除する"}
             </AlertDialogAction>

@@ -141,7 +141,7 @@ export function UpdateBookForm({ book }: BookDetailsTableProps) {
       <Button
         type="submit"
         variant="default"
-        className="bg-indigo-600 hover:bg-indigo-700"
+        className="bg-indigo-500 text-slate-100 hover:bg-indigo-400"
       >
         登録
       </Button>

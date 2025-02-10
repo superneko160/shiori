@@ -4,6 +4,7 @@ import { currentUser } from "@clerk/nextjs/server"
 
 import { BookDetailsTable } from "./../../../components/books/BookDetailsTable"
 import { DeleteButton, EditButton } from "./../../../components/buttons"
+import { UnauthenticatedView } from "./../../../components/UnauthenticatedView"
 
 export default async function DetailBookPage({
   params,
@@ -15,7 +16,7 @@ export default async function DetailBookPage({
 
   const user = await currentUser()
 
-  if (!user) return <div>新規登録 or ログインしてください</div>
+  if (!user) return <UnauthenticatedView />
 
   if (isNaN(bookId)) {
     return <div>Invalid book ID</div>
@@ -24,10 +25,10 @@ export default async function DetailBookPage({
   const book = await getBook(bookId)
 
   return (
-    <div className="container mx-3 mx-auto py-8">
+    <div className="mx-3 py-8 md:mx-12">
       {book ? (
         <div>
-          <div className="mb-6 flex items-center justify-between">
+          <div className="mb-6 items-center justify-between md:flex">
             <h1 className="mb-6 text-2xl font-bold">{book.title}</h1>
             <div className="flex">
               <Link href={`/books/edit/${bookId}`}>

@@ -84,7 +84,7 @@ export function CreateBookForm({ userId }: CreateBookFormProps) {
         type="submit"
         disabled={loading}
         variant="default"
-        className="bg-indigo-600 hover:bg-indigo-700"
+        className="bg-indigo-500 text-slate-100 hover:bg-indigo-400"
       >
         {loading ? "登録中" : "登録"}
       </Button>

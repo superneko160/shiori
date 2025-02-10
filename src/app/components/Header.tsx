@@ -3,16 +3,16 @@ import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
 
 export function Header() {
   return (
-    <header className="bg-indigo-400 py-5">
+    <header className="bg-slate-100 py-5 shadow-sm">
       <div className="flex">
         <div className="container ml-8">
           <Link href="/">
-            <h1 className="text-lg text-slate-100">Shiori</h1>
+            <h1 className="text-xl font-semibold text-slate-900">Shiori</h1>
           </Link>
         </div>
         <div className="mr-8">
           <SignedOut>
-            <SignInButton className="h-10 w-24 rounded-full bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700" />
+            <SignInButton className="h-10 w-24 rounded-full bg-indigo-500 px-4 py-2 font-medium text-slate-100 hover:bg-indigo-400" />
           </SignedOut>
           <SignedIn>
             <UserButton />

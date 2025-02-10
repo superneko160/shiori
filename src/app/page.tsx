@@ -13,17 +13,18 @@ import { currentUser } from "@clerk/nextjs/server"
 
 import type { Status } from "./types"
 import { NewButton } from "./components/buttons"
+import { UnauthenticatedView } from "./components/UnauthenticatedView"
 import { STATUS_CONFIG } from "./consts"
 
 export default async function Home() {
   const user = await currentUser()
 
-  if (!user) return <div>新規登録 or ログインしてください</div>
+  if (!user) return <UnauthenticatedView />
 
   const books = await getBooks(user.id)
 
   return (
-    <main className="container mx-auto py-8">
+    <main className="mx-3 py-8 md:mx-12">
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-2xl font-bold">書籍一覧</h1>
         <Link href="/books/new">

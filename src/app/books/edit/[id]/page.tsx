@@ -2,6 +2,7 @@ import { getBook } from "@/app/actions/books"
 import { currentUser } from "@clerk/nextjs/server"
 
 import { UpdateBookForm } from "./../../../components/books/UpdateBookForm"
+import { UnauthenticatedView } from "./../../../components/UnauthenticatedView"
 
 export default async function editBookPage({
   params,
@@ -13,7 +14,7 @@ export default async function editBookPage({
 
   const user = await currentUser()
 
-  if (!user) return <div>新規登録 or ログインしてください</div>
+  if (!user) return <UnauthenticatedView />
 
   if (isNaN(bookId)) {
     return <div>Invalid book ID</div>
@@ -22,7 +23,7 @@ export default async function editBookPage({
   const book = await getBook(bookId)
 
   return (
-    <div className="container mx-3 mx-auto py-8">
+    <div className="mx-3 py-8 md:mx-12">
       {book ? (
         <div>
           <UpdateBookForm book={book} />
