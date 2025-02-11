@@ -25,19 +25,19 @@ import { NewButton } from "./components/buttons"
 import { UnauthenticatedView } from "./components/UnauthenticatedView"
 import { STATUS_CONFIG } from "./consts"
 
-type SearchParams = {
+type Props = {
   searchParams: {
     page?: string
   }
 }
 
-export default async function Home({ searchParams }: SearchParams) {
+export default async function Home({ searchParams }: Props) {
   const user = await currentUser()
 
   if (!user) return <UnauthenticatedView />
 
-  const page = Number(searchParams.page) || 1
-  const { books, totalPages } = await getBooks(user.id, page)
+  const { page } = await searchParams
+  const { books, totalPages } = await getBooks(user.id, Number(page) || 1)
 
   return (
     <main className="mx-3 py-8 md:mx-12">
