@@ -29,23 +29,46 @@ type UpdateBookInput = {
   userId: string
 }
 
+type Books = {
+  books: Book[]
+  totalBooks: number
+  totalPages: number
+}
+
 /**
  * 全書籍情報の取得
  * @param {string} userId ユーザID
- * @return {Promise<Book[]>}
+ * @param {number} page
+ * @param {number} limit
+ * @return {Promise<Books>}
  */
-export async function getBooks(userId: string): Promise<Book[]> {
+export async function getBooks(
+  userId: string,
+  page = 1,
+  limit = 10,
+): Promise<Books> {
   try {
-    const books = await prisma.book.findMany({
-      where: {
-        userId: userId,
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
-    })
+    const skip = (page - 1) * limit
 
-    return books
+    const [books, totalBooks] = await Promise.all([
+      prisma.book.findMany({
+        where: { userId },
+        orderBy: { createdAt: "desc" },
+        skip,
+        take: limit,
+      }),
+      prisma.book.count({
+        where: { userId },
+      }),
+    ])
+
+    const totalPages = Math.ceil(totalBooks / limit)
+
+    return {
+      books,
+      totalBooks,
+      totalPages,
+    }
   } catch (error) {
     console.error(error)
     redirect("/error")
