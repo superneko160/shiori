@@ -67,10 +67,11 @@ http://localhost:3000
 | Package manager   | npm                 |
 | CSS Framework     | Tailwind CSS        |
 | UI Library        | shadcn/ui           |
-| Database          | PostgreSQL          |
+| Database          | Neon(PostgreSQL)    |
 | ORM               | Prisma              |
 | Authentication    | Clerk               |
 | Linter            | ESLint              |
 | Formatter         | Prettier            |
 | Testing Framework | Vitest              |
+| Hosting Service   | Vercel              |
 | Others            | Husky               |

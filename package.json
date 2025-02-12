@@ -16,7 +16,9 @@
     "prismalint": "prisma validate",
     "clean": "git clean -xdf node_modules dist",
     "prepare": "husky",
-    "test": "vitest"
+    "test": "vitest",
+    "postinstall": "prisma generate",
+    "vercel-build": "prisma generate && prisma migrate deploy && next build"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.11.1",
