@@ -12,7 +12,11 @@ export function Header() {
         </div>
         <div className="mr-8">
           <SignedOut>
-            <SignInButton className="h-10 w-24 rounded-full bg-indigo-500 px-4 py-2 font-medium text-slate-100 hover:bg-indigo-400" />
+            <SignInButton mode="modal">
+              <button className="h-10 w-24 rounded-full bg-indigo-500 px-4 py-2 font-medium text-slate-100 hover:bg-indigo-400">
+                Sign in
+              </button>
+            </SignInButton>
           </SignedOut>
           <SignedIn>
             <UserButton />

@@ -26,9 +26,9 @@ import { UnauthenticatedView } from "./components/UnauthenticatedView"
 import { STATUS_CONFIG } from "./consts"
 
 type Props = {
-  searchParams: {
-    page?: string
-  }
+  searchParams: Promise<{
+    p?: string
+  }>
 }
 
 export default async function Home({ searchParams }: Props) {
@@ -36,8 +36,9 @@ export default async function Home({ searchParams }: Props) {
 
   if (!user) return <UnauthenticatedView />
 
-  const { page } = await searchParams
-  const { books, totalPages } = await getBooks(user.id, Number(page) || 1)
+  const { p } = await searchParams
+  const page = Number(p)
+  const { books, totalPages } = await getBooks(user.id, page || 1)
 
   return (
     <main className="mx-3 py-8 md:mx-12">
