@@ -26,7 +26,6 @@ type UpdateBookInput = {
   startedAt?: Date | null
   finishedAt?: Date | null
   note: string
-  userId: string
 }
 
 type Books = {
