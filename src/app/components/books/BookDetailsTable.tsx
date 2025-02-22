@@ -5,8 +5,8 @@ import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table"
 
 import type { Book, Status } from "./../../types"
 import { STATUS_CONFIG } from "./../../consts"
-import { calculateProgress } from "./../../utils/book"
 import { formatDate } from "./../../utils/date"
+import { ProgressBarCell } from "./../bars"
 
 type BookDetailsTableProps = {
   book: Book
@@ -36,14 +36,10 @@ export function BookDetailsTable({ book }: BookDetailsTableProps) {
           <TableRow>
             <TableCell className="font-medium">進捗</TableCell>
             <TableCell>
-              {book.pagesRead && book.totalPages ? (
-                <div>
-                  {book.pagesRead} / {book.totalPages} ページ （
-                  {calculateProgress(book.pagesRead, book.totalPages)}）
-                </div>
-              ) : (
-                "-"
-              )}
+              <ProgressBarCell
+                pagesRead={book.pagesRead}
+                totalPages={book.totalPages}
+              />
             </TableCell>
           </TableRow>
           <TableRow>
