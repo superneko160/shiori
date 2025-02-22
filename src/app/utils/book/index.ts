@@ -14,10 +14,8 @@ export const statusMap: Record<BookStatus, string> = {
  * 進捗率の計算
  * @param {number} read 読了ページ数
  * @param {number} total 総ページ数
- * @return {string} 進捗率
+ * @return {number} 進捗率（小数点下1桁）
  */
 export function calculateProgress(read: number, total: number) {
-  if (!read || !total) return "-"
-  const progress = (read / total) * 100
-  return `${progress.toFixed(1)}%`
+  return Math.round((read / total) * 100 * 10) / 10
 }
