@@ -1,7 +1,7 @@
 "use server"
 
 import { redirect } from "next/navigation"
-import { BookStatus } from "@prisma/client"
+import { BookStatus, Prisma } from "@prisma/client"
 
 import type { Book } from "./../types"
 import { prisma } from "./../database/prismaclient"
@@ -37,27 +37,42 @@ type Books = {
 /**
  * 全書籍情報の取得
  * @param {string} userId ユーザID
- * @param {number} page
- * @param {number} limit
+ * @param {number} page ページ番号（初期値：1）
+ * @param {number} limit 1ページの表示件数（初期値：10件）
+ * @param {string} searchQuery 検索ワード（初期値：空文字列）
  * @return {Promise<Books>}
  */
 export async function getBooks(
   userId: string,
   page = 1,
   limit = 10,
+  searchQuery = "",
 ): Promise<Books> {
   try {
     const skip = (page - 1) * limit
 
+    // 検索条件の作成
+    const whereCondition: Prisma.BookWhereInput = {
+      userId,
+      ...(searchQuery
+        ? {
+            title: {
+              contains: searchQuery,
+              mode: Prisma.QueryMode.insensitive, // 大文字小文字を区別しない
+            },
+          }
+        : {}),
+    }
+
     const [books, totalBooks] = await Promise.all([
       prisma.book.findMany({
-        where: { userId },
-        orderBy: { createdAt: "desc" },
+        where: whereCondition,
+        orderBy: { updatedAt: "desc" },
         skip,
         take: limit,
       }),
       prisma.book.count({
-        where: { userId },
+        where: whereCondition,
       }),
     ])
 

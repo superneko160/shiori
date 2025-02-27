@@ -22,12 +22,14 @@ import { currentUser } from "@clerk/nextjs/server"
 
 import type { Status } from "./types"
 import { NewButton } from "./components/buttons"
+import { SearchForm } from "./components/SearchForm"
 import { UnauthenticatedView } from "./components/UnauthenticatedView"
 import { STATUS_CONFIG } from "./consts"
 
 type Props = {
   searchParams: Promise<{
     p?: string
+    search?: string
   }>
 }
 
@@ -36,17 +38,30 @@ export default async function Home({ searchParams }: Props) {
 
   if (!user) return <UnauthenticatedView />
 
-  const { p } = await searchParams
-  const page = Number(p)
-  const { books, totalPages } = await getBooks(user.id, page || 1)
+  const { p, search } = await searchParams
+  const page = Number(p) || 1
+  const limit = 10
+  const searchQuery = search ?? ""
+
+  const { books, totalPages } = await getBooks(
+    user.id,
+    page,
+    limit,
+    searchQuery,
+  )
 
   return (
     <main className="mx-3 py-8 md:mx-12">
-      <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-bold">書籍一覧</h1>
-        <Link href="/books/new">
-          <NewButton />
-        </Link>
+      <div className="mb-3 items-center justify-between md:mb-6 md:flex">
+        <h1 className="mb-2 text-2xl font-bold md:mb-0">書籍一覧</h1>
+        <div className="flex">
+          <div className="mx-2">
+            <SearchForm initialSearchQuery={searchQuery} />
+          </div>
+          <Link href="/books/new" className="mx-2">
+            <NewButton />
+          </Link>
+        </div>
       </div>
 
       <div className="rounded-lg border">
