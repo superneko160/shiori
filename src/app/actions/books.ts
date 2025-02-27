@@ -1,7 +1,7 @@
 "use server"
 
 import { redirect } from "next/navigation"
-import { BookStatus } from "@prisma/client"
+import { BookStatus, Prisma } from "@prisma/client"
 
 import type { Book } from "./../types"
 import { prisma } from "./../database/prismaclient"
@@ -52,13 +52,13 @@ export async function getBooks(
     const skip = (page - 1) * limit
 
     // 検索条件の作成
-    const whereCondition = {
+    const whereCondition: Prisma.BookWhereInput = {
       userId,
       ...(searchQuery
         ? {
             title: {
               contains: searchQuery,
-              mode: "insensitive", // 大文字小文字を区別しない
+              mode: Prisma.QueryMode.insensitive, // 大文字小文字を区別しない
             },
           }
         : {}),

@@ -55,7 +55,9 @@ export default async function Home({ searchParams }: Props) {
       <div className="mb-3 items-center justify-between md:mb-6 md:flex">
         <h1 className="mb-2 text-2xl font-bold md:mb-0">書籍一覧</h1>
         <div className="flex">
-          <SearchForm initialSearchQuery={searchQuery} className="mx-2" />
+          <div className="mx-2">
+            <SearchForm initialSearchQuery={searchQuery} />
+          </div>
           <Link href="/books/new" className="mx-2">
             <NewButton />
           </Link>
