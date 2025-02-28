@@ -3,5 +3,5 @@
   "**/*.{ts,tsx,js,jsx,cjs,mjs,md,json,lintstagedrc,yml,yaml}": [
     "prettier --write"
   ],
-  "*.{ts,tsx}": ["npm run typecheck"]
+  "**/*.{ts,tsx}": ["npm run typecheck"]
 }
