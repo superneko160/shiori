@@ -20,8 +20,7 @@ import {
 } from "@/components/ui/table"
 import { currentUser } from "@clerk/nextjs/server"
 
-import type { Status } from "./types"
-import { type SortDirection, type SortOption } from "./actions/books"
+import type { SortDirection, SortOption, Status } from "./types"
 import { NewButton, SortButton } from "./components/buttons"
 import { SearchForm } from "./components/SearchForm"
 import { UnauthenticatedView } from "./components/UnauthenticatedView"

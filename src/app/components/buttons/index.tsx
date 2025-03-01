@@ -32,7 +32,7 @@ import {
 } from "lucide-react"
 import { toast } from "sonner"
 
-import type { SortDirection, SortOption } from "./../../actions/books"
+import type { SortDirection, SortOption } from "./../../types"
 import { deleteBook } from "./../../actions/books"
 
 export function NewButton() {

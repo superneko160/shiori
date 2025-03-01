@@ -3,39 +3,9 @@
 import { redirect } from "next/navigation"
 import { BookStatus, Prisma } from "@prisma/client"
 
-import type { Book } from "./../types"
+import type { Book, Books, CreateBookInput, UpdateBookInput } from "./../types"
 import { prisma } from "./../database/prismaclient"
 import { getDateValue, getNumberValue, getStringValue } from "./../utils/form"
-
-type CreateBookInput = {
-  title: string
-  author: string
-  status: BookStatus
-  purchasedAt?: Date | null
-  userId: string
-}
-
-type UpdateBookInput = {
-  id: number
-  title: string
-  author: string
-  pagesRead: number
-  totalPages: number
-  status: BookStatus
-  purchasedAt?: Date | null
-  startedAt?: Date | null
-  finishedAt?: Date | null
-  note: string
-}
-
-type Books = {
-  books: Book[]
-  totalBooks: number
-  totalPages: number
-}
-
-export type SortOption = "updatedAt" | "createdAt"
-export type SortDirection = "desc" | "asc"
 
 /**
  * 全書籍情報の取得
