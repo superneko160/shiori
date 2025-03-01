@@ -25,6 +25,7 @@ import { NewButton, SortButton } from "./components/buttons"
 import { SearchForm } from "./components/SearchForm"
 import { UnauthenticatedView } from "./components/UnauthenticatedView"
 import { STATUS_CONFIG } from "./consts"
+import { isValidSortDirection, isValidSortOption } from "./utils/validator"
 
 type Props = {
   searchParams: Promise<{
@@ -179,16 +180,4 @@ export default async function Home({ searchParams }: Props) {
       </div>
     </main>
   )
-}
-
-// 有効なソートオプションかチェックする関数
-function isValidSortOption(value: string | undefined): value is SortOption {
-  return value === "updatedAt" || value === "createdAt"
-}
-
-// 有効なソート方向かチェックする関数
-function isValidSortDirection(
-  value: string | undefined,
-): value is SortDirection {
-  return value === "asc" || value === "desc"
 }
