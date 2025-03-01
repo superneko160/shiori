@@ -34,6 +34,9 @@ type Books = {
   totalPages: number
 }
 
+export type SortOption = "updatedAt" | "createdAt"
+export type SortDirection = "desc" | "asc"
+
 /**
  * 全書籍情報の取得
  * @param {string} userId ユーザID

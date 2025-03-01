@@ -21,7 +21,8 @@ import {
 import { currentUser } from "@clerk/nextjs/server"
 
 import type { Status } from "./types"
-import { NewButton } from "./components/buttons"
+import { type SortDirection, type SortOption } from "./actions/books"
+import { NewButton, SortButton } from "./components/buttons"
 import { SearchForm } from "./components/SearchForm"
 import { UnauthenticatedView } from "./components/UnauthenticatedView"
 import { STATUS_CONFIG } from "./consts"
@@ -30,6 +31,8 @@ type Props = {
   searchParams: Promise<{
     p?: string
     search?: string
+    sortBy?: SortOption
+    sortDir?: SortDirection
   }>
 }
 
@@ -38,10 +41,16 @@ export default async function Home({ searchParams }: Props) {
 
   if (!user) return <UnauthenticatedView />
 
-  const { p, search } = await searchParams
+  const { p, search, sortBy, sortDir } = await searchParams
   const page = Number(p) || 1
   const limit = 10
   const searchQuery = search ?? ""
+  const sortByValue: SortOption = isValidSortOption(sortBy)
+    ? sortBy
+    : "updatedAt"
+  const sortDirection: SortDirection = isValidSortDirection(sortDir)
+    ? sortDir
+    : "desc"
 
   const { books, totalPages } = await getBooks(
     user.id,
@@ -54,13 +63,21 @@ export default async function Home({ searchParams }: Props) {
     <main className="mx-3 py-8 md:mx-12">
       <div className="mb-3 items-center justify-between md:mb-6 md:flex">
         <h1 className="mb-2 text-2xl font-bold md:mb-0">書籍一覧</h1>
-        <div className="flex">
-          <div className="mx-2">
+        <div className="items-center md:flex">
+          <div className="mx-1 py-2">
             <SearchForm initialSearchQuery={searchQuery} />
           </div>
-          <Link href="/books/new" className="mx-2">
-            <NewButton />
-          </Link>
+          <div className="flex">
+            <div className="mx-1">
+              <SortButton
+                initialSortBy={sortByValue}
+                initialSortDirection={sortDirection}
+              />
+            </div>
+            <Link href="/books/new" className="mx-1">
+              <NewButton />
+            </Link>
+          </div>
         </div>
       </div>
 
@@ -163,4 +180,16 @@ export default async function Home({ searchParams }: Props) {
       </div>
     </main>
   )
+}
+
+// 有効なソートオプションかチェックする関数
+function isValidSortOption(value: string | undefined): value is SortOption {
+  return value === "updatedAt" || value === "createdAt"
+}
+
+// 有効なソート方向かチェックする関数
+function isValidSortDirection(
+  value: string | undefined,
+): value is SortDirection {
+  return value === "asc" || value === "desc"
 }

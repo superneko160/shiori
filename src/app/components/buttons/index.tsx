@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -13,9 +13,26 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
-import { CirclePlus, SquarePen, Trash2 } from "lucide-react"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import {
+  ArrowDownAZ,
+  ArrowUpAZ,
+  CalendarDays,
+  CirclePlus,
+  Clock,
+  SquarePen,
+  Trash2,
+} from "lucide-react"
 import { toast } from "sonner"
 
+import type { SortDirection, SortOption } from "./../../actions/books"
 import { deleteBook } from "./../../actions/books"
 
 export function NewButton() {
@@ -105,5 +122,92 @@ export function DeleteButton({ bookId }: DeleteBookButtonProps) {
         </AlertDialogContent>
       </AlertDialog>
     </div>
+  )
+}
+
+type SortButtonProps = {
+  initialSortBy: SortOption
+  initialSortDirection: SortDirection
+}
+
+type SortItem = {
+  label: string
+  value: SortOption
+  icon: React.ReactNode
+}
+
+export function SortButton({
+  initialSortBy,
+  initialSortDirection,
+}: SortButtonProps) {
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+
+  const sortItems: SortItem[] = [
+    {
+      label: "更新日",
+      value: "updatedAt",
+      icon: <Clock className="mr-2 h-4 w-4" />,
+    },
+    {
+      label: "登録日",
+      value: "createdAt",
+      icon: <CalendarDays className="mr-2 h-4 w-4" />,
+    },
+  ]
+
+  function getSortLabel() {
+    const item = sortItems.find((item) => item.value === initialSortBy)
+    return item ? item.label : "ソート"
+  }
+
+  function handleSort(sortBy: SortOption) {
+    const params = new URLSearchParams(searchParams)
+    params.set("sortBy", sortBy)
+
+    // 同じソート項目をクリックした場合は方向を切り替える
+    if (sortBy === initialSortBy) {
+      params.set("sortDir", initialSortDirection === "desc" ? "asc" : "desc")
+    } else {
+      // 別のソート項目を選んだ場合はデフォルトで降順
+      params.set("sortDir", "desc")
+    }
+
+    router.push(`${pathname}?${params.toString()}`)
+  }
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" size="sm" className="h-8 py-5">
+          {initialSortDirection === "desc" ? (
+            <ArrowDownAZ className="h-4 w-4" />
+          ) : (
+            <ArrowUpAZ className="h-4 w-4" />
+          )}
+          <span>{getSortLabel()}</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuLabel>並び替え</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        {sortItems.map((item) => (
+          <DropdownMenuItem
+            key={item.value}
+            className="flex cursor-pointer items-center"
+            onClick={() => handleSort(item.value)}
+          >
+            {item.icon}
+            <span>{item.label}</span>
+            {initialSortBy === item.value && (
+              <span className="ml-2 text-xs">
+                ({initialSortDirection === "desc" ? "降順" : "昇順"})
+              </span>
+            )}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }
