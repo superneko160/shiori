@@ -3,7 +3,14 @@
 import { redirect } from "next/navigation"
 import { BookStatus, Prisma } from "@prisma/client"
 
-import type { Book, Books, CreateBookInput, UpdateBookInput } from "./../types"
+import type {
+  Book,
+  Books,
+  CreateBookInput,
+  SortDirection,
+  SortOption,
+  UpdateBookInput,
+} from "./../types"
 import { prisma } from "./../database/prismaclient"
 import { getDateValue, getNumberValue, getStringValue } from "./../utils/form"
 
@@ -13,6 +20,8 @@ import { getDateValue, getNumberValue, getStringValue } from "./../utils/form"
  * @param {number} page ページ番号（初期値：1）
  * @param {number} limit 1ページの表示件数（初期値：10件）
  * @param {string} searchQuery 検索ワード（初期値：空文字列）
+ * @param {SortOption} sortBy ソート項目（初期値：更新日時）
+ * @param {SortDirection} sortDirection ソート方向（初期値：降順）
  * @return {Promise<Books>}
  */
 export async function getBooks(
@@ -20,6 +29,8 @@ export async function getBooks(
   page = 1,
   limit = 10,
   searchQuery = "",
+  sortBy: SortOption = "updatedAt",
+  sortDirection: SortDirection = "desc",
 ): Promise<Books> {
   try {
     const skip = (page - 1) * limit
@@ -37,10 +48,15 @@ export async function getBooks(
         : {}),
     }
 
+    // ソート条件の作成
+    const orderBy = {
+      [sortBy]: sortDirection,
+    }
+
     const [books, totalBooks] = await Promise.all([
       prisma.book.findMany({
         where: whereCondition,
-        orderBy: { updatedAt: "desc" },
+        orderBy,
         skip,
         take: limit,
       }),

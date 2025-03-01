@@ -25,6 +25,7 @@ import { NewButton, SortButton } from "./components/buttons"
 import { SearchForm } from "./components/SearchForm"
 import { UnauthenticatedView } from "./components/UnauthenticatedView"
 import { STATUS_CONFIG } from "./consts"
+import { formatDate } from "./utils/date"
 import { isValidSortDirection, isValidSortOption } from "./utils/validator"
 
 type Props = {
@@ -57,6 +58,8 @@ export default async function Home({ searchParams }: Props) {
     page,
     limit,
     searchQuery,
+    sortByValue,
+    sortDirection,
   )
 
   return (
@@ -97,10 +100,16 @@ export default async function Home({ searchParams }: Props) {
                   <Link
                     href={`/books/detail/${book.id}`}
                     key={book.id}
-                    className="hover:underline"
+                    className="text-indigo-500 hover:underline"
                   >
                     {book.title}
                   </Link>
+                  <div className="text-xs text-slate-500">
+                    更新日 {formatDate(book.updatedAt)}
+                  </div>
+                  <div className="text-xs text-slate-500">
+                    登録日 {formatDate(book.createdAt)}
+                  </div>
                 </TableCell>
                 <TableCell>{book.author ?? "-"}</TableCell>
                 <TableCell>
