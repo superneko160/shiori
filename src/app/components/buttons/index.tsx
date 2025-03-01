@@ -24,9 +24,7 @@ import {
 import {
   ArrowDownAZ,
   ArrowUpAZ,
-  CalendarDays,
   CirclePlus,
-  Clock,
   SquarePen,
   Trash2,
 } from "lucide-react"
@@ -133,7 +131,6 @@ type SortButtonProps = {
 type SortItem = {
   label: string
   value: SortOption
-  icon: React.ReactNode
 }
 
 export function SortButton({
@@ -148,12 +145,10 @@ export function SortButton({
     {
       label: "更新日",
       value: "updatedAt",
-      icon: <Clock className="mr-2 h-4 w-4" />,
     },
     {
       label: "登録日",
       value: "createdAt",
-      icon: <CalendarDays className="mr-2 h-4 w-4" />,
     },
   ]
 
@@ -198,7 +193,6 @@ export function SortButton({
             className="flex cursor-pointer items-center"
             onClick={() => handleSort(item.value)}
           >
-            {item.icon}
             <span>{item.label}</span>
             {initialSortBy === item.value && (
               <span className="ml-2 text-xs">
