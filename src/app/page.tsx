@@ -95,7 +95,7 @@ export default async function Home({ searchParams }: Props) {
           <TableHeader>
             <TableRow>
               <TableHead>タイトル</TableHead>
-              <TableHead>著者</TableHead>
+              <TableHead className="hidden sm:table-cell">著者</TableHead>
               <TableHead>ステータス</TableHead>
             </TableRow>
           </TableHeader>
@@ -117,7 +117,9 @@ export default async function Home({ searchParams }: Props) {
                     登録日 {formatDate(book.createdAt)}
                   </div>
                 </TableCell>
-                <TableCell>{book.author ?? "-"}</TableCell>
+                <TableCell className="hidden sm:table-cell">
+                  {book.author ?? "-"}
+                </TableCell>
                 <TableCell>
                   <Badge variant={STATUS_CONFIG[book.status as Status].variant}>
                     {STATUS_CONFIG[book.status as Status].label}
