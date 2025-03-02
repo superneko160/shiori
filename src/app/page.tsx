@@ -53,7 +53,7 @@ export default async function Home({ searchParams }: Props) {
   const sortDirection: SortDirection = isValidSortDirection(sortDir)
     ? sortDir
     : "desc"
-  const statusFilter = status ?? null
+  const statusFilter = status ?? "ALL"
 
   const { books, totalPages } = await getBooks(
     user.id,
