@@ -21,7 +21,7 @@ import {
 import { currentUser } from "@clerk/nextjs/server"
 
 import type { SortDirection, SortOption, Status } from "./types"
-import { NewButton, SortButton } from "./components/buttons"
+import { NewButton, SortButton, StatusFilterButton } from "./components/buttons"
 import { SearchForm } from "./components/SearchForm"
 import { UnauthenticatedView } from "./components/UnauthenticatedView"
 import { STATUS_CONFIG } from "./consts"
@@ -34,6 +34,7 @@ type Props = {
     search?: string
     sortBy?: SortOption
     sortDir?: SortDirection
+    status?: string
   }>
 }
 
@@ -42,7 +43,7 @@ export default async function Home({ searchParams }: Props) {
 
   if (!user) return <UnauthenticatedView />
 
-  const { p, search, sortBy, sortDir } = await searchParams
+  const { p, search, sortBy, sortDir, status } = await searchParams
   const page = Number(p) || 1
   const limit = 10
   const searchQuery = search ?? ""
@@ -52,6 +53,7 @@ export default async function Home({ searchParams }: Props) {
   const sortDirection: SortDirection = isValidSortDirection(sortDir)
     ? sortDir
     : "desc"
+  const statusFilter = status ?? null
 
   const { books, totalPages } = await getBooks(
     user.id,
@@ -60,6 +62,7 @@ export default async function Home({ searchParams }: Props) {
     searchQuery,
     sortByValue,
     sortDirection,
+    statusFilter,
   )
 
   return (
@@ -71,6 +74,9 @@ export default async function Home({ searchParams }: Props) {
             <SearchForm initialSearchQuery={searchQuery} />
           </div>
           <div className="flex">
+            <div className="mx-1">
+              <StatusFilterButton initialStatus={statusFilter} />
+            </div>
             <div className="mx-1">
               <SortButton
                 initialSortBy={sortByValue}

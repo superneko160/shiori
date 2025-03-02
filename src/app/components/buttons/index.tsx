@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useCallback, useState } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import {
   AlertDialog,
@@ -18,6 +18,8 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
@@ -25,6 +27,7 @@ import {
   ArrowDownAZ,
   ArrowUpAZ,
   CirclePlus,
+  Filter,
   SquarePen,
   Trash2,
 } from "lucide-react"
@@ -32,6 +35,7 @@ import { toast } from "sonner"
 
 import type { SortDirection, SortOption } from "./../../types"
 import { deleteBook } from "./../../actions/books"
+import { STATUS_CONFIG } from "./../../consts"
 
 export function NewButton() {
   return (
@@ -201,6 +205,74 @@ export function SortButton({
             )}
           </DropdownMenuItem>
         ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
+
+type StatusFilterButtonProps = {
+  initialStatus?: string | null
+}
+
+export function StatusFilterButton({ initialStatus }: StatusFilterButtonProps) {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+
+  // 現在のURLパラメータを新しいステータスで更新する
+  const createQueryString = useCallback(
+    (status: string | null) => {
+      const params = new URLSearchParams(searchParams.toString())
+
+      // statusが選択された場合のみ追加、そうでなければ削除
+      if (status) {
+        params.set("status", status)
+      } else {
+        params.delete("status")
+      }
+
+      // ページをリセット
+      params.delete("p")
+
+      return params.toString()
+    },
+    [searchParams],
+  )
+
+  // ステータス変更のハンドラ
+  function handleStatusChange(value: string) {
+    // "ALL"の場合はステータスフィルタを削除
+    const newStatus = value === "ALL" ? null : value
+    router.push(`?${createQueryString(newStatus)}`)
+  }
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" className="h-10 gap-2">
+          <Filter className="h-4 w-4" />
+          ステータス
+          {initialStatus && (
+            <span className="ml-1 rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
+              {STATUS_CONFIG[initialStatus as keyof typeof STATUS_CONFIG]
+                ?.label || "すべて"}
+            </span>
+          )}
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuLabel>ステータスでフィルタリング</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuRadioGroup
+          value={initialStatus ?? "ALL"}
+          onValueChange={handleStatusChange}
+        >
+          <DropdownMenuRadioItem value="ALL">すべて表示</DropdownMenuRadioItem>
+          {Object.entries(STATUS_CONFIG).map(([key, { label }]) => (
+            <DropdownMenuRadioItem key={key} value={key}>
+              {label}
+            </DropdownMenuRadioItem>
+          ))}
+        </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
   )
