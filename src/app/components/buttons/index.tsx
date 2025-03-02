@@ -44,7 +44,7 @@ export function NewButton() {
       className="bg-indigo-500 text-slate-100 hover:bg-indigo-400"
     >
       <CirclePlus className="h-5 w-5" />
-      書籍登録
+      <span className="hidden sm:inline">書籍登録</span>
     </Button>
   )
 }
@@ -250,7 +250,7 @@ export function StatusFilterButton({ initialStatus }: StatusFilterButtonProps) {
       <DropdownMenuTrigger asChild>
         <Button variant="outline" className="h-10 gap-2">
           <Filter className="h-4 w-4" />
-          ステータス
+          <span className="hidden sm:inline">ステータス</span>
           {initialStatus && (
             <span className="ml-1 rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
               {STATUS_CONFIG[initialStatus as keyof typeof STATUS_CONFIG]
@@ -260,7 +260,6 @@ export function StatusFilterButton({ initialStatus }: StatusFilterButtonProps) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuLabel>ステータスでフィルタリング</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup
           value={initialStatus ?? "ALL"}
