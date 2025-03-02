@@ -22,6 +22,7 @@ import { getDateValue, getNumberValue, getStringValue } from "./../utils/form"
  * @param {string} searchQuery 検索ワード（初期値：空文字列）
  * @param {SortOption} sortBy ソート項目（初期値：更新日時）
  * @param {SortDirection} sortDirection ソート方向（初期値：降順）
+ * @param {string} status 書籍のステータス（初期値：全データ取得）
  * @return {Promise<Books>}
  */
 export async function getBooks(
@@ -31,6 +32,7 @@ export async function getBooks(
   searchQuery = "",
   sortBy: SortOption = "updatedAt",
   sortDirection: SortDirection = "desc",
+  status = "ALL",
 ): Promise<Books> {
   try {
     const skip = (page - 1) * limit
@@ -46,6 +48,7 @@ export async function getBooks(
             },
           }
         : {}),
+      ...(status && status !== "ALL" ? { status: status as BookStatus } : {}),
     }
 
     // ソート条件の作成
