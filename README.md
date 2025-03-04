@@ -2,6 +2,10 @@
 
 本をどこまで読んだかメモしておく用のアプリ
 
+## Architecture
+
+![アーキテクチャ図](/docs/architecture.png)
+
 ## SetUp Environment file
 
 ```bash
