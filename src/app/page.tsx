@@ -102,7 +102,7 @@ export default async function Home({ searchParams }: Props) {
           <TableBody>
             {books.map((book) => (
               <TableRow key={book.id}>
-                <TableCell className="font-medium">
+                <TableCell className="w-2/3 font-medium sm:w-2/5">
                   <Link
                     href={`/books/detail/${book.id}`}
                     key={book.id}
@@ -117,10 +117,10 @@ export default async function Home({ searchParams }: Props) {
                     登録日 {formatDate(book.createdAt)}
                   </div>
                 </TableCell>
-                <TableCell className="hidden sm:table-cell">
+                <TableCell className="hidden sm:table-cell sm:w-2/5">
                   {book.author ?? "-"}
                 </TableCell>
-                <TableCell>
+                <TableCell className="w-1/3 sm:w-1/5">
                   <Badge variant={STATUS_CONFIG[book.status as Status].variant}>
                     {STATUS_CONFIG[book.status as Status].label}
                   </Badge>
