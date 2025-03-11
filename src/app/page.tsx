@@ -2,15 +2,6 @@ import Link from "next/link"
 import { getBooks } from "@/app/actions/books"
 import { Badge } from "@/components/ui/badge"
 import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination"
-import {
   Table,
   TableBody,
   TableCell,
@@ -22,6 +13,7 @@ import { currentUser } from "@clerk/nextjs/server"
 
 import type { SortDirection, SortOption, Status } from "./types"
 import { NewButton, SortButton, StatusFilterButton } from "./components/buttons"
+import { BookPagination } from "./components/pagination"
 import { SearchForm } from "./components/SearchForm"
 import { UnauthenticatedView } from "./components/UnauthenticatedView"
 import { STATUS_CONFIG } from "./consts"
@@ -140,61 +132,8 @@ export default async function Home({ searchParams }: Props) {
           </TableBody>
         </Table>
       </div>
-      <div className="py-4">
-        <Pagination>
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious
-                href={`?page=${page - 1}`}
-                aria-disabled={page <= 1}
-                className={page <= 1 ? "pointer-events-none opacity-50" : ""}
-              />
-            </PaginationItem>
 
-            {/* 最初のページ */}
-            <PaginationItem>
-              <PaginationLink href="?page=1" isActive={page === 1}>
-                1
-              </PaginationLink>
-            </PaginationItem>
-
-            {/* 省略記号と中間ページ */}
-            {page > 3 && <PaginationEllipsis />}
-
-            {page > 2 && page < totalPages && (
-              <PaginationItem>
-                <PaginationLink href={`?page=${page}`} isActive>
-                  {page}
-                </PaginationLink>
-              </PaginationItem>
-            )}
-
-            {page < totalPages - 2 && <PaginationEllipsis />}
-
-            {/* 最後のページ */}
-            {totalPages > 1 && (
-              <PaginationItem>
-                <PaginationLink
-                  href={`?page=${totalPages}`}
-                  isActive={page === totalPages}
-                >
-                  {totalPages}
-                </PaginationLink>
-              </PaginationItem>
-            )}
-
-            <PaginationItem>
-              <PaginationNext
-                href={`?page=${page + 1}`}
-                aria-disabled={page >= totalPages}
-                className={
-                  page >= totalPages ? "pointer-events-none opacity-50" : ""
-                }
-              />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
-      </div>
+      <BookPagination currentPage={page} totalPages={totalPages} />
     </main>
   )
 }
