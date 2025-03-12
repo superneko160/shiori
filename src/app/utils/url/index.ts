@@ -2,8 +2,15 @@
  * クエリにページ番号を追加したURLを取得
  * @param {string} baseUrl ベースとなるURL
  * @param {number} page ページ番号
- * @return {string} ページ番号を追加したURL
+ * @param {URLSearchParams} searchParams 現在のクエリパラメータ
+ * @return {string} ページ番号とその他のパラメータを含むURL
  */
-export function getPageUrl(baseUrl: string, page: number) {
-  return `${baseUrl}?p=${page}`
+export function getPageUrl(
+  baseUrl: string,
+  page: number,
+  searchParams: URLSearchParams,
+) {
+  const params = new URLSearchParams(searchParams)
+  params.set("p", page.toString())
+  return `${baseUrl}?${params.toString()}`
 }
