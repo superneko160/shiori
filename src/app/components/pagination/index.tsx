@@ -1,3 +1,6 @@
+"use client"
+
+import { useSearchParams } from "next/navigation"
 import {
   Pagination,
   PaginationContent,
@@ -21,13 +24,15 @@ export function BookPagination({
   totalPages,
   baseUrl = "",
 }: BookPaginationProps) {
+  const searchParams = useSearchParams()
+
   return (
     <div className="py-4">
       <Pagination>
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious
-              href={getPageUrl(baseUrl, currentPage - 1)}
+              href={getPageUrl(baseUrl, currentPage - 1, searchParams)}
               aria-disabled={currentPage <= 1}
               className={
                 currentPage <= 1 ? "pointer-events-none opacity-50" : ""
@@ -38,7 +43,7 @@ export function BookPagination({
           {/* 最初のページ */}
           <PaginationItem>
             <PaginationLink
-              href={getPageUrl(baseUrl, 1)}
+              href={getPageUrl(baseUrl, 1, searchParams)}
               isActive={currentPage === 1}
             >
               1
@@ -50,7 +55,10 @@ export function BookPagination({
 
           {currentPage > 2 && currentPage < totalPages && (
             <PaginationItem>
-              <PaginationLink href={getPageUrl(baseUrl, currentPage)} isActive>
+              <PaginationLink
+                href={getPageUrl(baseUrl, currentPage, searchParams)}
+                isActive
+              >
                 {currentPage}
               </PaginationLink>
             </PaginationItem>
@@ -62,7 +70,7 @@ export function BookPagination({
           {totalPages > 1 && (
             <PaginationItem>
               <PaginationLink
-                href={getPageUrl(baseUrl, totalPages)}
+                href={getPageUrl(baseUrl, totalPages, searchParams)}
                 isActive={currentPage === totalPages}
               >
                 {totalPages}
@@ -72,7 +80,7 @@ export function BookPagination({
 
           <PaginationItem>
             <PaginationNext
-              href={getPageUrl(baseUrl, currentPage + 1)}
+              href={getPageUrl(baseUrl, currentPage + 1, searchParams)}
               aria-disabled={currentPage >= totalPages}
               className={
                 currentPage >= totalPages
