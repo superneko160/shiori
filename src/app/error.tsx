@@ -1,25 +1,17 @@
 "use client"
 
-import { useEffect } from "react"
+import Link from "next/link"
 
-export default function Error({
-  error,
-}: {
-  error: Error & { digest?: string }
-}) {
-  useEffect(() => {
-    console.error(error)
-  }, [error])
-
+export default function Error() {
   return (
     <div className="container mx-auto py-[50px]">
       <div className="text-center">
-        <h2 className="mb-4 text-2xl font-bold text-red-600">
-          エラーが発生しました
-        </h2>
-        <p className="mb-6 text-gray-600">
-          {error.message || "予期せぬエラーが発生しました"}
-        </p>
+        <h2 className="text-2xl">500 - Internal Server Error</h2>
+        <Link href="/">
+          <button className="mt-4 rounded bg-blue-500 px-4 py-2 text-white transition-colors hover:bg-blue-600">
+            ホームに戻る
+          </button>
+        </Link>
       </div>
     </div>
   )
