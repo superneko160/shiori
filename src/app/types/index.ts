@@ -23,6 +23,15 @@ export type Books = {
   totalPages: number
 }
 
+// 書籍（取得の失敗）
+export type BooksError = {
+  error: string
+}
+
+// 書籍（取得結果）
+export type BookResult = Book | BooksError
+export type BooksResult = Books | BooksError
+
 // 書籍の状態
 export type Status =
   | "CONSIDERING_PURCHASE"

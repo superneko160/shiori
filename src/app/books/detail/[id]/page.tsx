@@ -22,7 +22,13 @@ export default async function DetailBookPage({
     return <div>Invalid book ID</div>
   }
 
-  const book = await getBook(bookId)
+  const result = await getBook(bookId)
+
+  if ("error" in result) {
+    throw new Error(result.error)
+  }
+
+  const book = result
 
   return (
     <div className="mx-3 py-8 md:mx-12">
