@@ -1,11 +1,8 @@
-"use server"
-
-import { redirect } from "next/navigation"
 import { BookStatus, Prisma } from "@prisma/client"
 
 import type {
-  Book,
-  Books,
+  BookResult,
+  BooksResult,
   CreateBookInput,
   SortDirection,
   SortOption,
@@ -23,7 +20,7 @@ import { getDateValue, getNumberValue, getStringValue } from "./../utils/form"
  * @param {SortOption} sortBy ソート項目（初期値：更新日時）
  * @param {SortDirection} sortDirection ソート方向（初期値：降順）
  * @param {string} status 書籍のステータス（初期値：全データ取得）
- * @return {Promise<Books>}
+ * @return {Promise<BooksResult>} 書籍情報
  */
 export async function getBooks(
   userId: string,
@@ -33,7 +30,7 @@ export async function getBooks(
   sortBy: SortOption = "updatedAt",
   sortDirection: SortDirection = "desc",
   status = "ALL",
-): Promise<Books> {
+): Promise<BooksResult> {
   try {
     const skip = (page - 1) * limit
 
@@ -77,16 +74,16 @@ export async function getBooks(
     }
   } catch (error) {
     console.error(error)
-    redirect("/error")
+    return { error: "データの取得に失敗しました" }
   }
 }
 
 /**
  * 書籍の取得
  * @param {number} id 書籍ID
- * @return {Promise<Book | null>}
+ * @return {Promise<BookResult>} 書籍情報
  */
-export async function getBook(id: number): Promise<Book | null> {
+export async function getBook(id: number): Promise<BookResult> {
   try {
     const book = await prisma.book.findUnique({
       where: {
@@ -94,10 +91,14 @@ export async function getBook(id: number): Promise<Book | null> {
       },
     })
 
+    if (!book) {
+      return { error: "書籍が見つかりませんでした" }
+    }
+
     return book
   } catch (error) {
     console.error(error)
-    redirect("/error")
+    return { error: "データの取得に失敗しました" }
   }
 }
 

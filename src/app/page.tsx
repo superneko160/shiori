@@ -47,7 +47,7 @@ export default async function Home({ searchParams }: Props) {
     : "desc"
   const statusFilter = status ?? "ALL"
 
-  const { books, totalPages } = await getBooks(
+  const result = await getBooks(
     user.id,
     page,
     limit,
@@ -56,6 +56,12 @@ export default async function Home({ searchParams }: Props) {
     sortDirection,
     statusFilter,
   )
+
+  if ("error" in result) {
+    throw new Error(result.error)
+  }
+
+  const { books, totalPages } = result
 
   return (
     <main className="mx-3 py-8 md:mx-12">
