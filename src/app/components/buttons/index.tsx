@@ -76,14 +76,15 @@ export function DeleteButton({ bookId }: DeleteBookButtonProps) {
       const result = await deleteBook(bookId)
 
       if (!result.success) {
+        toast.error(result.error)
         throw new Error(result.error)
       }
 
       toast.error("書籍の情報を削除しました")
       router.push("/")
     } catch (error) {
-      console.error("Error deleting book:", error)
-      alert("本の削除に失敗しました")
+      console.error(error)
+      toast.error("書籍の情報を削除に失敗しました")
     } finally {
       setIsDeleting(false)
       setOpen(false)

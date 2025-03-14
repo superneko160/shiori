@@ -1,3 +1,5 @@
+"use server"
+
 import { BookStatus, Prisma } from "@prisma/client"
 
 import type {
@@ -74,7 +76,7 @@ export async function getBooks(
     }
   } catch (error) {
     console.error(error)
-    return { error: "データの取得に失敗しました" }
+    return { error: "書籍の取得に失敗しました" }
   }
 }
 
@@ -98,7 +100,7 @@ export async function getBook(id: number): Promise<BookResult> {
     return book
   } catch (error) {
     console.error(error)
-    return { error: "データの取得に失敗しました" }
+    return { error: "書籍の取得に失敗しました" }
   }
 }
 
@@ -118,10 +120,11 @@ export async function createBook(formData: FormData, userId: string) {
 
     return { success: true, book }
   } catch (error) {
-    if (error instanceof Error) {
-      return { success: false, error: error.message }
+    console.error(error)
+    return {
+      success: false,
+      error: "書籍の登録に失敗しました。再度お試しください",
     }
-    return { success: false, error: "エラーが発生しました" }
   }
 }
 
@@ -168,10 +171,11 @@ export async function updateBook(id: number, formData: FormData) {
 
     return { success: true, book }
   } catch (error) {
-    if (error instanceof Error) {
-      return { success: false, error: error.message }
+    console.error(error)
+    return {
+      success: false,
+      error: "書籍の更新に失敗しました。再度お試しください",
     }
-    return { success: false, error: "エラーが発生しました" }
   }
 }
 
@@ -231,9 +235,10 @@ export async function deleteBook(id: number) {
 
     return { success: true, book }
   } catch (error) {
-    if (error instanceof Error) {
-      return { success: false, error: error.message }
+    console.error(error)
+    return {
+      success: false,
+      error: "書籍の削除に失敗しました。再度お試しください",
     }
-    return { success: false, error: "エラーが発生しました" }
   }
 }
