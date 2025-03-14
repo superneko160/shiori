@@ -10,6 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { currentUser } from "@clerk/nextjs/server"
+import { toast } from "sonner"
 
 import type { SortDirection, SortOption, Status } from "./types"
 import { NewButton, SortButton, StatusFilterButton } from "./components/buttons"
@@ -58,6 +59,7 @@ export default async function Home({ searchParams }: Props) {
   )
 
   if ("error" in result) {
+    toast.error(result.error)
     throw new Error(result.error)
   }
 

@@ -39,6 +39,8 @@ export function UpdateBookForm({ book }: BookDetailsTableProps) {
     if (result.success) {
       toast.success("書籍の情報を更新しました")
       router.push(`/books/detail/${book.id}`)
+    } else {
+      toast.error(result.error)
     }
   }
 

@@ -31,7 +31,7 @@ export function CreateBookForm({ userId }: CreateBookFormProps) {
       toast.success("書籍の登録が完了しました")
       router.push("/books/new")
     } else {
-      toast.error("書籍の登録に失敗しました。再度お試しください")
+      toast.error(result.error)
     }
   }
 
