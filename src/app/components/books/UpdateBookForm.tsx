@@ -25,6 +25,7 @@ import { Calendar as CalendarIcon } from "lucide-react"
 import { toast } from "sonner"
 
 import type { Book } from "./../../types"
+import { dateToString } from "./../../utils/date"
 
 type BookDetailsTableProps = {
   book: Book
@@ -163,13 +164,6 @@ function DateSelect({
   // 初期値を適切にDate型に変換
   const initialDate = defaultValue ? new Date(defaultValue) : null
   const [date, setDate] = useState<Date | null>(initialDate)
-
-  // 日付を文字列に変換する関数
-  function dateToString(date: Date | null): string {
-    if (!date) return ""
-    // 日付が有効かチェック
-    return !isNaN(date.getTime()) ? date.toISOString() : ""
-  }
 
   return (
     <div className="flex flex-col gap-2">
