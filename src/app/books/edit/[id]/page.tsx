@@ -1,8 +1,7 @@
 import { getBook } from "@/app/actions/books"
+import { UpdateBookForm } from "@/app/components/books/UpdateBookForm"
+import { UnauthenticatedView } from "@/app/components/UnauthenticatedView"
 import { currentUser } from "@clerk/nextjs/server"
-
-import { UpdateBookForm } from "./../../../components/books/UpdateBookForm"
-import { UnauthenticatedView } from "./../../../components/UnauthenticatedView"
 
 export default async function editBookPage({
   params,

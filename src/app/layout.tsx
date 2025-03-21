@@ -1,8 +1,7 @@
 import type { Metadata } from "next"
+import { Header } from "@/app/components/Header"
 import { Toaster } from "@/components/ui/sonner"
 import { ClerkProvider } from "@clerk/nextjs"
-
-import { Header } from "./components/Header"
 
 import "@/styles/globals.css"
 

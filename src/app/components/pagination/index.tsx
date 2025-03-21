@@ -1,6 +1,7 @@
 "use client"
 
 import { useSearchParams } from "next/navigation"
+import { getPageUrl } from "@/app/utils/url"
 import {
   Pagination,
   PaginationContent,
@@ -10,8 +11,6 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination"
-
-import { getPageUrl } from "./../../utils/url"
 
 type BookPaginationProps = {
   currentPage: number

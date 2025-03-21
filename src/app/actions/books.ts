@@ -1,7 +1,5 @@
 "use server"
 
-import { BookStatus, Prisma } from "@prisma/client"
-
 import type {
   BookResult,
   BooksResult,
@@ -9,9 +7,10 @@ import type {
   SortDirection,
   SortOption,
   UpdateBookInput,
-} from "./../types"
-import { prisma } from "./../database/prismaclient"
-import { getDateValue, getNumberValue, getStringValue } from "./../utils/form"
+} from "@/app/types"
+import { prisma } from "@/app/database/prismaclient"
+import { getDateValue, getNumberValue, getStringValue } from "@/app/utils/form"
+import { BookStatus, Prisma } from "@prisma/client"
 
 /**
  * 全書籍情報の取得

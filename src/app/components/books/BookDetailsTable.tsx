@@ -1,10 +1,9 @@
+import type { Book, Status } from "@/app/types"
+import { ProgressBarCell } from "@/app/components/bars"
+import { STATUS_CONFIG } from "@/app/consts"
+import { formatDate } from "@/app/utils/date"
 import { Badge } from "@/components/ui/badge"
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table"
-
-import type { Book, Status } from "./../../types"
-import { STATUS_CONFIG } from "./../../consts"
-import { formatDate } from "./../../utils/date"
-import { ProgressBarCell } from "./../bars"
 
 type BookDetailsTableProps = {
   book: Book

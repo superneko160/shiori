@@ -1,7 +1,10 @@
 "use client"
 
-import { useCallback, useState } from "react"
+import type { SortDirection, SortItem, SortOption } from "@/app/types"
+import { useState } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { deleteBook } from "@/app/actions/books"
+import { STATUS_CONFIG } from "@/app/consts"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -32,10 +35,6 @@ import {
   Trash2,
 } from "lucide-react"
 import { toast } from "sonner"
-
-import type { SortDirection, SortOption } from "./../../types"
-import { deleteBook } from "./../../actions/books"
-import { STATUS_CONFIG } from "./../../consts"
 
 export function NewButton() {
   return (
@@ -133,11 +132,6 @@ type SortButtonProps = {
   initialSortDirection: SortDirection
 }
 
-type SortItem = {
-  label: string
-  value: SortOption
-}
-
 export function SortButton({
   initialSortBy,
   initialSortDirection,
@@ -219,29 +213,20 @@ export function StatusFilterButton({ initialStatus }: StatusFilterButtonProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
 
-  // 現在のURLパラメータを新しいステータスで更新する
-  const createQueryString = useCallback(
-    (status: string | null) => {
-      const params = new URLSearchParams(searchParams.toString())
+  function createQueryString(status: string | null) {
+    const params = new URLSearchParams(searchParams.toString())
 
-      // statusが選択された場合のみ追加、そうでなければ削除
-      if (status) {
-        params.set("status", status)
-      } else {
-        params.delete("status")
-      }
+    if (status) {
+      params.set("status", status)
+    } else {
+      params.delete("status")
+    }
 
-      // ページをリセット
-      params.delete("p")
+    params.delete("p")
+    return params.toString()
+  }
 
-      return params.toString()
-    },
-    [searchParams],
-  )
-
-  // ステータス変更のハンドラ
   function handleStatusChange(value: string) {
-    // "ALL"の場合はステータスフィルタを削除
     const newStatus = value === "ALL" ? null : value
     router.push(`?${createQueryString(newStatus)}`)
   }

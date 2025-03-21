@@ -1,4 +1,4 @@
-import type { Status, StatusConfig } from "./../types"
+import type { Status, StatusConfig } from "@/app/types"
 
 export const STATUS_CONFIG: Record<Status, StatusConfig> = {
   CONSIDERING_PURCHASE: {

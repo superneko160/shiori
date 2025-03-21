@@ -71,3 +71,9 @@ export type UpdateBookInput = {
 // ソート用
 export type SortOption = "updatedAt" | "createdAt"
 export type SortDirection = "desc" | "asc"
+
+// ソート項目
+export type SortItem = {
+  label: string
+  value: SortOption
+}

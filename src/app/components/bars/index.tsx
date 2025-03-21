@@ -1,6 +1,5 @@
 import React from "react"
-
-import { calculateProgress } from "./../../utils/book"
+import { calculateProgress } from "@/app/utils/book"
 
 type ProgressBarCellProps = {
   pagesRead: number
