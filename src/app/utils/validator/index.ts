@@ -1,4 +1,4 @@
-import type { SortDirection, SortOption } from "./../../types"
+import type { SortDirection, SortOption } from "@/app/types"
 
 /**
  * 有効なソートオプションか判定

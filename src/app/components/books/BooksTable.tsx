@@ -1,6 +1,9 @@
 "use client"
 
+import type { Book, Status } from "@/app/types"
 import Link from "next/link"
+import { STATUS_CONFIG } from "@/app/consts"
+import { formatDate } from "@/app/utils/date"
 import { Badge } from "@/components/ui/badge"
 import {
   Table,
@@ -10,10 +13,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-
-import type { Book, Status } from "./../../types"
-import { STATUS_CONFIG } from "./../../consts"
-import { formatDate } from "./../../utils/date"
 
 type BooksTableProps = {
   books: Book[]

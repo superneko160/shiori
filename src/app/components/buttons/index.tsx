@@ -1,7 +1,10 @@
 "use client"
 
+import type { SortDirection, SortItem, SortOption } from "@/app/types"
 import { useState } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { deleteBook } from "@/app/actions/books"
+import { STATUS_CONFIG } from "@/app/consts"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -32,10 +35,6 @@ import {
   Trash2,
 } from "lucide-react"
 import { toast } from "sonner"
-
-import type { SortDirection, SortItem, SortOption } from "./../../types"
-import { deleteBook } from "./../../actions/books"
-import { STATUS_CONFIG } from "./../../consts"
 
 export function NewButton() {
   return (

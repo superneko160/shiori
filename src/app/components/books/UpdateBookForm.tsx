@@ -1,8 +1,10 @@
 "use client"
 
+import type { Book } from "@/app/types"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { updateBook } from "@/app/actions/books"
+import { dateToString } from "@/app/utils/date"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { Input } from "@/components/ui/input"
@@ -23,9 +25,6 @@ import { cn } from "@/lib/utils"
 import { format } from "date-fns"
 import { Calendar as CalendarIcon } from "lucide-react"
 import { toast } from "sonner"
-
-import type { Book } from "./../../types"
-import { dateToString } from "./../../utils/date"
 
 type BookDetailsTableProps = {
   book: Book

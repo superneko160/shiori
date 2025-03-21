@@ -1,10 +1,9 @@
 import Link from "next/link"
 import { getBook } from "@/app/actions/books"
+import { BookDetailsTable } from "@/app/components/books/BookDetailsTable"
+import { DeleteButton, EditButton } from "@/app/components/buttons"
+import { UnauthenticatedView } from "@/app/components/UnauthenticatedView"
 import { currentUser } from "@clerk/nextjs/server"
-
-import { BookDetailsTable } from "./../../../components/books/BookDetailsTable"
-import { DeleteButton, EditButton } from "./../../../components/buttons"
-import { UnauthenticatedView } from "./../../../components/UnauthenticatedView"
 
 export default async function DetailBookPage({
   params,

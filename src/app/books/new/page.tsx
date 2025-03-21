@@ -1,7 +1,6 @@
+import { CreateBookForm } from "@/app/components/books/CreateBookForm"
+import { UnauthenticatedView } from "@/app/components/UnauthenticatedView"
 import { currentUser } from "@clerk/nextjs/server"
-
-import { CreateBookForm } from "./../../components/books/CreateBookForm"
-import { UnauthenticatedView } from "./../../components/UnauthenticatedView"
 
 export default async function NewBookPage() {
   const user = await currentUser()
