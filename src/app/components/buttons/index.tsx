@@ -33,7 +33,7 @@ import {
 } from "lucide-react"
 import { toast } from "sonner"
 
-import type { SortDirection, SortOption } from "./../../types"
+import type { SortDirection, SortItem, SortOption } from "./../../types"
 import { deleteBook } from "./../../actions/books"
 import { STATUS_CONFIG } from "./../../consts"
 
@@ -131,11 +131,6 @@ export function DeleteButton({ bookId }: DeleteBookButtonProps) {
 type SortButtonProps = {
   initialSortBy: SortOption
   initialSortDirection: SortDirection
-}
-
-type SortItem = {
-  label: string
-  value: SortOption
 }
 
 export function SortButton({
