@@ -1,5 +1,3 @@
-"use client"
-
 import type { Book, Status } from "@/app/types"
 import Link from "next/link"
 import { STATUS_CONFIG } from "@/app/consts"
