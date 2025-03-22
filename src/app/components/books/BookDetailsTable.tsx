@@ -1,3 +1,5 @@
+"use client"
+
 import type { Book, Status } from "@/app/types"
 import { ProgressBarCell } from "@/app/components/bars"
 import { STATUS_CONFIG } from "@/app/consts"
