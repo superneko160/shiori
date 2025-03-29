@@ -1,0 +1,22 @@
+version: 2
+updates:
+  # npmパッケージの依存関係を管理
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "saturday"
+      time: "21:00"
+      timezone: "Asia/Tokyo"
+    # PRの設定
+    open-pull-requests-limit: 10
+    versioning-strategy: auto
+    labels:
+      - "dependencies"
+    ignore:
+      # TailwindCSS関連パッケージを除外
+      - dependency-name: "tailwindcss"
+      - dependency-name: "tailwindcss-animate"
+      - dependency-name: "tailwind-merge"
+      - dependency-name: "prettier-plugin-tailwindcss"
+      - dependency-name: "@tailwindcss/*"
