@@ -13,10 +13,12 @@ updates:
     versioning-strategy: auto
     labels:
       - "dependencies"
-    ignore:
-      # TailwindCSS関連パッケージを除外
-      - dependency-name: "tailwindcss"
-      - dependency-name: "tailwindcss-animate"
-      - dependency-name: "tailwind-merge"
-      - dependency-name: "prettier-plugin-tailwindcss"
-      - dependency-name: "@tailwindcss/*"
+    allow:
+      # Next.js関連
+      - dependency-name: "next"
+      - dependency-name: "next-themes"
+      # React関連
+      - dependency-name: "react"
+      - dependency-name: "react-dom"
+      - dependency-name: "@types/react"
+      - dependency-name: "@types/react-dom"
