@@ -94,11 +94,12 @@ export function UpdateBookForm({ book }: BookDetailsTableProps) {
             読了ページ数
           </label>
           <Input
-            type="number"
+            type="text"
             id="pagesRead"
             name="pagesRead"
             defaultValue={book.pagesRead}
-            min="0"
+            pattern="[0-9]*"
+            inputMode="numeric"
             className="mt-1"
           />
         </div>
@@ -107,11 +108,12 @@ export function UpdateBookForm({ book }: BookDetailsTableProps) {
             総ページ数
           </label>
           <Input
-            type="number"
+            type="text"
             id="totalPages"
             name="totalPages"
             defaultValue={book.totalPages}
-            min="0"
+            pattern="[0-9]*"
+            inputMode="numeric"
             className="mt-1"
           />
         </div>
