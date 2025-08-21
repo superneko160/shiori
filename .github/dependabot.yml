@@ -22,6 +22,16 @@ updates:
       - dependency-name: "react-dom"
       - dependency-name: "@types/react"
       - dependency-name: "@types/react-dom"
+      # 認証関連
+      - dependency-name: "@clerk/nextjs"
+      # データベース関連
+      - dependency-name: "@prisma/client"
+      - dependency-name: "prisma"
+      # UI関連
+      - dependency-name: "lucide-react"
+      # 開発ツール関連
+      - dependency-name: "husky"
+      - dependency-name: "vitest"
     # React系のパッケージの更新はまとめて実施
     groups:
       react:
@@ -30,6 +40,14 @@ updates:
           - "react-dom"
           - "@types/react"
           - "@types/react-dom"
+        update-types:
+          - "major"
+          - "minor"
+          - "patch"
+      prisma:
+        patterns:
+          - "prisma"
+          - "@prisma/client"
         update-types:
           - "major"
           - "minor"
