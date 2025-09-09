@@ -14,7 +14,7 @@ export function SearchForm({ initialSearchQuery }: SearchFormProps) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const [searchQuery, setSearchQuery] = useState(initialSearchQuery)
-  const [isPending, startTransition] = useTransition()
+  const [, startTransition] = useTransition()
 
   // 検索条件の変更時にURLを更新する
   useEffect(() => {
