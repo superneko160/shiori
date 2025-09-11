@@ -16,7 +16,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout(props: RootLayoutProps) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+    >
       <html lang="ja">
         <body>
           <Header />
