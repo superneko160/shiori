@@ -6,33 +6,6 @@ const nextConfig: NextConfig = {
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
       process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
   },
-  // CORS設定
-  async headers() {
-    return [
-      {
-        source: "/(.*)",
-        headers: [
-          {
-            key: "Access-Control-Allow-Origin",
-            value:
-              "https://frontend-api.clerk.services, https://accounts.clerk.services, clerk.shiori-sneko.online, accounts.shiori-sneko.online",
-          },
-          {
-            key: "Access-Control-Allow-Methods",
-            value: "GET, POST, PUT, DELETE, OPTIONS",
-          },
-          {
-            key: "Access-Control-Allow-Headers",
-            value: "Content-Type, Authorization, X-Requested-With",
-          },
-          {
-            key: "Access-Control-Allow-Credentials",
-            value: "true",
-          },
-        ],
-      },
-    ]
-  },
 }
 
 // ビルド時に環境変数をチェック
