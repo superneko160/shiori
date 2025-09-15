@@ -15,7 +15,7 @@ const nextConfig: NextConfig = {
           {
             key: "Access-Control-Allow-Origin",
             value:
-              "https://frontend-api.clerk.services, https://accounts.clerk.services",
+              "https://frontend-api.clerk.services, https://accounts.clerk.services, clerk.shiori-sneko.online, accounts.shiori-sneko.online",
           },
           {
             key: "Access-Control-Allow-Methods",
