@@ -1,6 +1,7 @@
 import type { SortDirection, SortOption } from "@/app/types"
 import Link from "next/link"
 import { getBooks } from "@/app/actions/books"
+import { auth } from "@/app/auth"
 import { BooksTable } from "@/app/components/books/BooksTable"
 import {
   NewButton,
@@ -11,7 +12,6 @@ import { BookPagination } from "@/app/components/pagination"
 import { SearchForm } from "@/app/components/SearchForm"
 import { UnauthenticatedView } from "@/app/components/UnauthenticatedView"
 import { isValidSortDirection, isValidSortOption } from "@/app/utils/validator"
-import { currentUser } from "@clerk/nextjs/server"
 import { toast } from "sonner"
 
 type Props = {
@@ -25,9 +25,9 @@ type Props = {
 }
 
 export default async function Home({ searchParams }: Props) {
-  const user = await currentUser()
+  const session = await auth()
 
-  if (!user) return <UnauthenticatedView />
+  if (!session?.user) return <UnauthenticatedView />
 
   const { p, search, sortBy, sortDir, status } = await searchParams
   const page = Number(p) || 1
@@ -42,7 +42,7 @@ export default async function Home({ searchParams }: Props) {
   const statusFilter = status ?? "ALL"
 
   const result = await getBooks(
-    user.id,
+    session.user.email,
     page,
     limit,
     searchQuery,

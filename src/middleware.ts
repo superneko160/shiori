@@ -1,8 +1,4 @@
-import { clerkMiddleware } from "@clerk/nextjs/server"
-
-export { auth as middleware } from "@/auth"
-
-export default clerkMiddleware()
+export { auth as middleware } from "@/app/auth"
 
 export const config = {
   matcher: [

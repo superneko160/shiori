@@ -1,7 +1,7 @@
 import { getBook } from "@/app/actions/books"
+import { auth } from "@/app/auth"
 import { UpdateBookForm } from "@/app/components/books/UpdateBookForm"
 import { UnauthenticatedView } from "@/app/components/UnauthenticatedView"
-import { currentUser } from "@clerk/nextjs/server"
 
 export default async function editBookPage({
   params,
@@ -11,9 +11,9 @@ export default async function editBookPage({
   const { id } = await params
   const bookId = parseInt(id)
 
-  const user = await currentUser()
+  const session = await auth()
 
-  if (!user) return <UnauthenticatedView />
+  if (!session?.user) return <UnauthenticatedView />
 
   if (isNaN(bookId)) {
     return <div>Invalid book ID</div>
