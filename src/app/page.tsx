@@ -27,7 +27,7 @@ type Props = {
 export default async function Home({ searchParams }: Props) {
   const session = await auth()
 
-  if (!session?.user) return <UnauthenticatedView />
+  if (!session?.user?.email) return <UnauthenticatedView />
 
   const { p, search, sortBy, sortDir, status } = await searchParams
   const page = Number(p) || 1

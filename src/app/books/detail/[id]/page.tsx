@@ -15,7 +15,7 @@ export default async function DetailBookPage({
 
   const session = await auth()
 
-  if (!session?.user) return <UnauthenticatedView />
+  if (!session?.user?.email) return <UnauthenticatedView />
 
   if (isNaN(bookId)) {
     return <div>Invalid book ID</div>

@@ -5,7 +5,7 @@ import { UnauthenticatedView } from "@/app/components/UnauthenticatedView"
 export default async function NewBookPage() {
   const session = await auth()
 
-  if (!session?.user) return <UnauthenticatedView />
+  if (!session?.user?.email) return <UnauthenticatedView />
 
   return (
     <div className="mx-3 py-8 md:mx-12">
