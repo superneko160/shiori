@@ -1,9 +1,9 @@
 import Link from "next/link"
 import { getBook } from "@/app/actions/books"
+import { auth } from "@/app/auth"
 import { BookDetailsTable } from "@/app/components/books/BookDetailsTable"
 import { DeleteButton, EditButton } from "@/app/components/buttons"
 import { UnauthenticatedView } from "@/app/components/UnauthenticatedView"
-import { currentUser } from "@clerk/nextjs/server"
 
 export default async function DetailBookPage({
   params,
@@ -13,9 +13,9 @@ export default async function DetailBookPage({
   const { id } = await params
   const bookId = parseInt(id)
 
-  const user = await currentUser()
+  const session = await auth()
 
-  if (!user) return <UnauthenticatedView />
+  if (!session?.user?.email) return <UnauthenticatedView />
 
   if (isNaN(bookId)) {
     return <div>Invalid book ID</div>

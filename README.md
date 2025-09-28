@@ -14,23 +14,20 @@ npm install
 
 ### Prisma
 
-```bash
-touch .env
-```
+edit `.env` file.
 
 ```env
 DATABASE_URL="postgresql://postgres:yourpassword@localhost:5432/shiori?schema=public"
 ```
 
-### Clerk
+### Auth.js
 
-```bash
-touch .env.local
-```
+create and edit `.env.local` file.
 
 ```env
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=xxxxx
-CLERK_SECRET_KEY=xxxxx
+AUTH_SECRET="your-secret-here"
+GOOGLE_CLIENT_ID="your-google-client-id-here"
+GOOGLE_CLIENT_SECRET="your-google-client-secret-here"
 ```
 
 ## Create Database
@@ -44,15 +41,21 @@ WITH
     TEMPLATE template0;
 ```
 
+edit `.env.local` file.
+
+```env
+DATABASE_URL="postgresql://neondb_xxxxxxx"
+```
+
 ## Execute migration
 
-```bash
+```sh
 npx prisma migrate dev
 ```
 
 ## Run
 
-```bash
+```sh
 npm run dev
 ```
 
@@ -73,7 +76,7 @@ http://localhost:3000
 | UI Library        | shadcn/ui           |
 | Database          | Neon(PostgreSQL)    |
 | ORM               | Prisma              |
-| Authentication    | Clerk               |
+| Authentication    | Auth.js             |
 | Linter            | ESLint              |
 | Formatter         | Prettier            |
 | Testing Framework | Vitest              |
