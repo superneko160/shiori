@@ -1,5 +1,7 @@
 import { clerkMiddleware } from "@clerk/nextjs/server"
 
+export { auth as middleware } from "@/auth"
+
 export default clerkMiddleware()
 
 export const config = {
