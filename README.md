@@ -8,7 +8,7 @@
 
 ## SetUp Environment file
 
-```bash
+```sh
 npm install
 ```
 
