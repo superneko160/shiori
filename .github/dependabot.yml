@@ -29,7 +29,10 @@ updates:
       - dependency-name: "lucide-react"
       # 開発ツール関連
       - dependency-name: "husky"
+      - dependency-name: "lint-staged"
       - dependency-name: "vitest"
+      # 認証関連
+      - dependency-name: "next-auth"
     # React系のパッケージの更新はまとめて実施
     groups:
       react:
